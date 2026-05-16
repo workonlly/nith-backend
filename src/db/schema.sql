@@ -355,4 +355,15 @@ CREATE TABLE ug_tables (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- downlaod table strucnture end here
+-- academic_notices start here
+CREATE TABLE academic_notices (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    category VARCHAR(100),
+    date VARCHAR(100),
+    view_url VARCHAR(500),
+    download_url VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- academic_notices end here
