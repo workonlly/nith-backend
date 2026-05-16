@@ -14,10 +14,20 @@ exports.updateChairperson = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, name, description, dates, image } = req.body;
-    const result = await db.query(
-      'UPDATE chairperson SET title = $1, name = $2, description = $3, dates = $4, image = $5 WHERE id = $6 RETURNING *',
-      [title, name, description, dates, image, id]
-    );
+    
+    // Use UPSERT for singleton-like page
+    const result = await db.query(`
+      INSERT INTO chairperson (id, title, name, description, dates, image)
+      VALUES ($1, $2, $3, $4, $5, $6)
+      ON CONFLICT (id) DO UPDATE SET
+        title = EXCLUDED.title,
+        name = EXCLUDED.name,
+        description = EXCLUDED.description,
+        dates = EXCLUDED.dates,
+        image = EXCLUDED.image
+      RETURNING *
+    `, [id || 1, title, name, description, dates, image]);
+    
     res.json({ success: true, data: result.rows[0] });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -74,7 +84,7 @@ exports.deleteDean = async (req, res) => {
 // ===================== VIGILANCE OFFICER CRUD =====================
 exports.getVigilanceOfficers = async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM administration_viligence_officer ORDER BY id');
+    const result = await db.query('SELECT * FROM administration_vigilance ORDER BY id');
     res.json({ success: true, data: result.rows });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -86,7 +96,7 @@ exports.updateVigilanceOfficer = async (req, res) => {
     const { id } = req.params;
     const { name, responsibility, email, phone } = req.body;
     const result = await db.query(
-      'UPDATE administration_viligence_officer SET name = $1, responsibility = $2, email = $3, phone = $4 WHERE id = $5 RETURNING *',
+      'UPDATE administration_vigilance SET name = $1, responsibility = $2, email = $3, phone = $4 WHERE id = $5 RETURNING *',
       [name, responsibility, email, phone, id]
     );
     res.json({ success: true, data: result.rows[0] });
@@ -99,7 +109,7 @@ exports.createVigilanceOfficer = async (req, res) => {
   try {
     const { name, responsibility, email, phone } = req.body;
     const result = await db.query(
-      'INSERT INTO administration_viligence_officer (name, responsibility, email, phone) VALUES ($1, $2, $3, $4) RETURNING *',
+      'INSERT INTO administration_vigilance (name, responsibility, email, phone) VALUES ($1, $2, $3, $4) RETURNING *',
       [name, responsibility, email, phone]
     );
     res.status(201).json({ success: true, data: result.rows[0] });
@@ -111,7 +121,7 @@ exports.createVigilanceOfficer = async (req, res) => {
 exports.deleteVigilanceOfficer = async (req, res) => {
   try {
     const { id } = req.params;
-    await db.query('DELETE FROM administration_viligence_officer WHERE id = $1', [id]);
+    await db.query('DELETE FROM administration_vigilance WHERE id = $1', [id]);
     res.json({ success: true, message: 'Officer deleted successfully' });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

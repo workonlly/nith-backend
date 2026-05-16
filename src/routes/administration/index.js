@@ -16,11 +16,14 @@ router.post('/deans', administrationController.createDean);
 router.put('/deans/:id', administrationController.updateDean);
 router.delete('/deans/:id', administrationController.deleteDean);
 
-// Vigilance Officers
-router.get('/vigilance', administrationController.getVigilanceOfficers);
-router.post('/vigilance', administrationController.createVigilanceOfficer);
-router.put('/vigilance/:id', administrationController.updateVigilanceOfficer);
-router.delete('/vigilance/:id', administrationController.deleteVigilanceOfficer);
+// Vigilance
+router.get('/vigilance', administrationController.getAllVigilanceMembers);
+router.post('/vigilance', administrationController.createVigilanceMember);
+router.put('/vigilance/:id', administrationController.updateVigilanceMember);
+router.delete('/vigilance/:id', administrationController.deleteVigilanceMember);
+router.get('/vigilance-downloads', administrationController.getAllVigilanceDownloads);
+router.post('/vigilance-downloads', administrationController.createVigilanceDownload);
+router.delete('/vigilance-downloads/:id', administrationController.deleteVigilanceDownload);
 
 // Director Info
 router.get('/director', administrationController.getDirectorInfo);
@@ -71,14 +74,6 @@ router.post('/registrar-office', administrationController.createRegistrarOfficeS
 router.put('/registrar-office/:id', administrationController.updateRegistrarOfficeStaff);
 router.delete('/registrar-office/:id', administrationController.deleteRegistrarOfficeStaff);
 
-// Vigilance
-router.get('/vigilance', administrationController.getAllVigilanceMembers);
-router.post('/vigilance', administrationController.createVigilanceMember);
-router.put('/vigilance/:id', administrationController.updateVigilanceMember);
-router.delete('/vigilance/:id', administrationController.deleteVigilanceMember);
-router.get('/vigilance-downloads', administrationController.getAllVigilanceDownloads);
-router.post('/vigilance-downloads', administrationController.createVigilanceDownload);
-router.delete('/vigilance-downloads/:id', administrationController.deleteVigilanceDownload);
 
 // Visitors
 router.get('/visitors-info', administrationController.getVisitorsInfo);

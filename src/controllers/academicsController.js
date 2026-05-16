@@ -3,7 +3,15 @@ const db = require('../db/db');
 // ===================== ACADEMICS OVERVIEW CRUD =====================
 exports.getAcademics = async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM academics ORDER BY id');
+    const { page_name } = req.query;
+    let query = 'SELECT * FROM academics';
+    let params = [];
+    if (page_name) {
+      query += ' WHERE page_name = $1';
+      params.push(page_name);
+    }
+    query += ' ORDER BY id';
+    const result = await db.query(query, params);
     res.json({ success: true, data: result.rows });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -12,12 +20,21 @@ exports.getAcademics = async (req, res) => {
 
 exports.updateAcademics = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { title, description } = req.body;
-    const result = await db.query(
-      'UPDATE academics SET title = $1, description = $2 WHERE id = $3 RETURNING *',
-      [title, description, id]
-    );
+    const { page_name, title_en, title_hi, description_en, description_hi, hero_image, content } = req.body;
+    // Upsert logic
+    const checkResult = await db.query('SELECT id FROM academics WHERE page_name = $1', [page_name]);
+    let result;
+    if (checkResult.rows.length > 0) {
+      result = await db.query(
+        'UPDATE academics SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_image = $6, content = $7 WHERE page_name = $1 RETURNING *',
+        [page_name, title_en, title_hi, description_en, description_hi, hero_image, content]
+      );
+    } else {
+      result = await db.query(
+        'INSERT INTO academics (page_name, title_en, title_hi, description_en, description_hi, hero_image, content) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+        [page_name, title_en, title_hi, description_en, description_hi, hero_image, content]
+      );
+    }
     res.json({ success: true, data: result.rows[0] });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -27,7 +44,15 @@ exports.updateAcademics = async (req, res) => {
 // ===================== ACADEMICS TABLES CRUD =====================
 exports.getAllAcademicTables = async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM academic_tables ORDER BY id');
+    const { table_name } = req.query;
+    let query = 'SELECT * FROM academic_tables';
+    let params = [];
+    if (table_name) {
+      query += ' WHERE table_name = $1';
+      params.push(table_name);
+    }
+    query += ' ORDER BY id';
+    const result = await db.query(query, params);
     res.json({ success: true, data: result.rows });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -74,7 +99,15 @@ exports.deleteAcademicTableEntry = async (req, res) => {
 // ===================== ACADEMICS LINKS CRUD =====================
 exports.getAllAcademicLinks = async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM academics_links ORDER BY created_at DESC');
+    const { category } = req.query;
+    let query = 'SELECT * FROM academics_links';
+    let params = [];
+    if (category) {
+      query += ' WHERE category = $1';
+      params.push(category);
+    }
+    query += ' ORDER BY created_at DESC';
+    const result = await db.query(query, params);
     res.json({ success: true, data: result.rows });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -83,10 +116,10 @@ exports.getAllAcademicLinks = async (req, res) => {
 
 exports.createAcademicLink = async (req, res) => {
   try {
-    const { title, name, title_href, word_url } = req.body;
+    const { category, title, url, is_external } = req.body;
     const result = await db.query(
-      'INSERT INTO academics_links (title, name, title_href, word_url) VALUES ($1, $2, $3, $4) RETURNING *',
-      [title, name, title_href, word_url]
+      'INSERT INTO academics_links (category, title, url, is_external) VALUES ($1, $2, $3, $4) RETURNING *',
+      [category, title, url, is_external || false]
     );
     res.status(201).json({ success: true, data: result.rows[0] });
   } catch (error) {
