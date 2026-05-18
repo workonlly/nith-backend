@@ -4,6 +4,8 @@ const academicsController = require('../../controllers/academicsController');
 
 // Overview
 router.get('/overview', academicsController.getAcademics);
+router.post('/overview', academicsController.updateAcademics);
+router.put('/overview', academicsController.updateAcademics);
 router.put('/overview/:id', academicsController.updateAcademics);
 
 // Tables (Functionaries)

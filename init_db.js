@@ -155,6 +155,7 @@ async function init() {
     await db.query('ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_hi TEXT');
     await db.query('ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_en TEXT');
     await db.query('ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_hi TEXT');
+    await db.query('ALTER TABLE academics ADD COLUMN IF NOT EXISTS hero_image TEXT');
     await db.query('ALTER TABLE academics ADD COLUMN IF NOT EXISTS content JSONB');
     try {
       await db.query('ALTER TABLE academics ADD CONSTRAINT academics_page_name_unique UNIQUE (page_name)');

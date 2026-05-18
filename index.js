@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './src/.env' }); // Load env variables
+require('dotenv').config({ path: require('path').resolve(__dirname, '.env') }); // Load env variables from root
 const express = require('express');
 const cors = require('cors');  // Import cors
 const app = express();
@@ -35,7 +35,15 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const fs = require('fs');
+const path = require('path');
+app.listen(PORT, '0.0.0.0', () => {
+  const msg = `Server started at ${new Date().toISOString()} on port ${PORT}. process.env.PORT is ${process.env.PORT}\n`;
+  console.log(msg);
+  fs.appendFileSync(path.resolve(__dirname, 'startup.log'), msg);
+}).on('error', (err) => {
+  const errMsg = `Server failed to start: ${err.message}\n`;
+  console.error(errMsg);
+  fs.appendFileSync(path.resolve(__dirname, 'startup.log'), errMsg);
 });
 
