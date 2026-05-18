@@ -1,52 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const academicsController = require('../../controllers/academicsController');
 
-// Optional: middleware specific to this router
-// const auth = require('../middleware/auth');
-// router.use(auth);
+// Overview
+router.get('/overview', academicsController.getAcademics);
+router.post('/overview', academicsController.updateAcademics);
+router.put('/overview', academicsController.updateAcademics);
+router.put('/overview/:id', academicsController.updateAcademics);
 
-// GET /api/v1/xyz
-router.get('/', (req, res) => {
-  res.json({
-    message: 'List of items',
-    data: []
-  });
-});
+// Tables (Functionaries)
+router.get('/tables', academicsController.getAllAcademicTables);
+router.post('/tables', academicsController.createAcademicTableEntry);
+router.put('/tables/:id', academicsController.updateAcademicTableEntry);
+router.delete('/tables/:id', academicsController.deleteAcademicTableEntry);
 
-// GET /api/v1/xyz/:id
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({
-    message: `Details of item ${id}`,
-    data: { id }
-  });
-});
+// Links (Notice Board, Calendars, etc)
+router.get('/links', academicsController.getAllAcademicLinks);
+router.post('/links', academicsController.createAcademicLink);
+router.delete('/links/:id', academicsController.deleteAcademicLink);
 
-// POST /api/v1/xyz
-router.post('/', (req, res) => {
-  const body = req.body;
-  res.status(201).json({
-    message: 'Item created',
-    data: body
-  });
-});
+// Notices
+router.get('/notices', academicsController.getAllAcademicNotices);
+router.post('/notices', academicsController.createAcademicNotice);
+router.put('/notices/:id', academicsController.updateAcademicNotice);
+router.delete('/notices/:id', academicsController.deleteAcademicNotice);
 
-// PUT /api/v1/xyz/:id
-router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  res.json({
-    message: `Item ${id} updated`,
-    data: body
-  });
-});
-
-// DELETE /api/v1/xyz/:id
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({
-    message: `Item ${id} deleted`
-  });
-});
+// Calendars
+router.get('/calendars', academicsController.getAllAcademicCalendars);
+router.post('/calendars', academicsController.createAcademicCalendar);
+router.put('/calendars/:id', academicsController.updateAcademicCalendar);
+router.delete('/calendars/:id', academicsController.deleteAcademicCalendar);
 
 module.exports = router;
