@@ -1,52 +1,26 @@
 const express = require('express');
 const router = express.Router();
 
-// Optional: middleware specific to this router
-// const auth = require('../middleware/auth');
-// router.use(auth);
+// Import all flat routing files to mount them cleanly under the /v1/alumni path
+const alumniActivities = require('../alumniActivities');
+const alumniMou = require('../alumniMou');
+const alumniFunctionaries = require('../alumniFunctionaries');
+const alumniAssist = require('../alumniAssist');
+const alumniDistinguished = require('../alumniDistinguished');
+const alumniRegistration = require('../alumniRegistration');
+const alumniEndowment = require('../alumniEndowment');
+const alumniAwards = require('../alumniAwards');
+const alumniAnnualMeet = require('../alumniAnnualMeet');
 
-// GET /api/v1/xyz
-router.get('/', (req, res) => {
-  res.json({
-    message: 'List of items',
-    data: []
-  });
-});
-
-// GET /api/v1/xyz/:id
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({
-    message: `Details of item ${id}`,
-    data: { id }
-  });
-});
-
-// POST /api/v1/xyz
-router.post('/', (req, res) => {
-  const body = req.body;
-  res.status(201).json({
-    message: 'Item created',
-    data: body
-  });
-});
-
-// PUT /api/v1/xyz/:id
-router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  res.json({
-    message: `Item ${id} updated`,
-    data: body
-  });
-});
-
-// DELETE /api/v1/xyz/:id
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({
-    message: `Item ${id} deleted`
-  });
-});
+// Mount them on their respective sub-paths
+router.use('/activities', alumniActivities);
+router.use('/mou', alumniMou);
+router.use('/functionaries', alumniFunctionaries);
+router.use('/assist', alumniAssist);
+router.use('/distinguished', alumniDistinguished);
+router.use('/registration', alumniRegistration);
+router.use('/endowment', alumniEndowment);
+router.use('/awards', alumniAwards);
+router.use('/annual-meet', alumniAnnualMeet);
 
 module.exports = router;
