@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const accountsRoutes = require('./accounts');
+const visitorsRoutes = require('./visitors');
 
 // Optional: middleware specific to this router
 // const auth = require('../middleware/auth');
@@ -8,13 +9,17 @@ const accountsRoutes = require('./accounts');
 
 // Accounts Management Routes
 router.use('/accounts', accountsRoutes);
+router.use('/visitors', visitorsRoutes);
+router.use('/visitor', visitorsRoutes);
 
 // GET /api/v1/administration
 router.get('/', (req, res) => {
   res.json({
-    message: 'Administration module - includes accounts management',
+    message: 'Administration module - includes accounts and visitor management',
     endpoints: {
-      'accounts': '/accounts/*'
+      accounts: '/accounts/*',
+      visitors: '/visitors/*',
+      visitor: '/visitor/*'
     }
   });
 });

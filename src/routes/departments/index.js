@@ -1,52 +1,27 @@
+// src/routes/departments/index.js
+// Master departments router - department_master CRUD + department-specific sub-routes
+
 const express = require('express');
 const router = express.Router();
+const departmentController = require('../../controllers/departmentController');
 
-// Optional: middleware specific to this router
-// const auth = require('../middleware/auth');
-// router.use(auth);
+// Department-specific routers (mount before /:deptCode to avoid route conflicts)
+const cseRouter = require('./cse');
+router.use('/cse', cseRouter);
+const mncRouter = require('./mnc');
+router.use('/mnc', mncRouter);
+const phyRouter = require('./phy');
+router.use('/phy', phyRouter);
+const mscRouter = require('./msc');
+router.use('/msc', mscRouter);
+const chemRouter = require('./chem');
+router.use('/chem', chemRouter);
 
-// GET /api/v1/xyz
-router.get('/', (req, res) => {
-  res.json({
-    message: 'List of items',
-    data: []
-  });
-});
-
-// GET /api/v1/xyz/:id
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({
-    message: `Details of item ${id}`,
-    data: { id }
-  });
-});
-
-// POST /api/v1/xyz
-router.post('/', (req, res) => {
-  const body = req.body;
-  res.status(201).json({
-    message: 'Item created',
-    data: body
-  });
-});
-
-// PUT /api/v1/xyz/:id
-router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  const body = req.body;
-  res.json({
-    message: `Item ${id} updated`,
-    data: body
-  });
-});
-
-// DELETE /api/v1/xyz/:id
-router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  res.json({
-    message: `Item ${id} deleted`
-  });
-});
+// Department master CRUD (/v1/departments)
+router.get('/', departmentController.getAllDepartments);
+router.get('/:deptCode', departmentController.getDepartmentByCode);
+router.post('/', departmentController.createDepartment);
+router.put('/:deptCode', departmentController.updateDepartment);
+router.delete('/:deptCode', departmentController.deleteDepartment);
 
 module.exports = router;
