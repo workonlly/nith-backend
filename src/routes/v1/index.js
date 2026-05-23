@@ -27,5 +27,15 @@ router.use('/faculty', require('../faculty'));
 
 // Students routes
 router.use('/students', require('../students'));
+router.use('/homepage', require('../../homepage/hero'));
+router.use('/homepage', require('../../homepage/about'));
+router.use('/homepage', require('../../homepage/event'));
+router.use('/homepage', require('../../homepage/academics'));
+router.use('/homepage', require('../../homepage/news'));
+router.use('/homepage', require('../../homepage/admission'));
+router.use('/homepage', require('../../homepage/placements'));
+router.use('/homepage', require('../../homepage/achievements'));
+router.use('/homepage', require('../../homepage/director'));
+router.use('/homepage', require('../../homepage/gallery'));
 
 module.exports = router;
