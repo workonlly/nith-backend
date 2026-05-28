@@ -251,7 +251,7 @@ CREATE TABLE gallery_images (
     alt_text_en TEXT DEFAULT '',
     alt_text_hi TEXT DEFAULT '',
 
-    image_url TEXT DEFAULT '',
+    image TEXT DEFAULT '',
 
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW());

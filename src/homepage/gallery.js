@@ -1,25 +1,89 @@
-// src/homepage/gallery.js
-
 const express = require('express');
 
-const router = express.Router();
+const multer = require('multer');
+
+const multerS3 = require('multer-s3');
+
+const {
+  DeleteObjectCommand
+} = require('@aws-sdk/client-s3');
+
+const path = require('path');
 
 const pool = require('../db/db');
 
-/**
- * =========================================
- * GET /gallery
- * =========================================
- */
+const s3Client = require('../db/minio');
+
+const router = express.Router();
+
+
+// ======================================================
+// MULTER CONFIG
+// ======================================================
+
+const upload = multer({
+
+  storage: multerS3({
+
+    s3: s3Client,
+
+    bucket: 'gallery-images',
+
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+
+    metadata: (req, file, cb) => {
+
+      cb(null, {
+        fieldName: file.fieldname,
+      });
+    },
+
+    key: (req, file, cb) => {
+
+      const uniqueName =
+        Date.now() +
+        '-' +
+        Math.round(Math.random() * 1e9) +
+        path.extname(file.originalname);
+
+      cb(null, uniqueName);
+    },
+  }),
+
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+
+  fileFilter: (req, file, cb) => {
+
+    const allowedTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'image/jpg',
+    ];
+
+    if (!allowedTypes.includes(file.mimetype)) {
+
+      return cb(
+        new Error(
+          'Only JPG, PNG and WEBP images are allowed'
+        )
+      );
+    }
+
+    cb(null, true);
+  },
+});
+
+
+// ======================================================
+// GET GALLERY
+// ======================================================
 
 router.get('/gallery', async (req, res) => {
-  try {
 
-    /**
-     * =========================
-     * SECTION
-     * =========================
-     */
+  try {
 
     const sectionResult = await pool.query(`
       SELECT *
@@ -27,12 +91,6 @@ router.get('/gallery', async (req, res) => {
       ORDER BY id DESC
       LIMIT 1
     `);
-
-    /**
-     * =========================
-     * IMAGES
-     * =========================
-     */
 
     const imagesResult = await pool.query(`
       SELECT *
@@ -50,12 +108,6 @@ router.get('/gallery', async (req, res) => {
         description_hi: '',
       };
 
-    /**
-     * =========================
-     * FORMAT IMAGES
-     * =========================
-     */
-
     const images = imagesResult.rows.map(
       (img) => ({
         id: img.id,
@@ -69,7 +121,8 @@ router.get('/gallery', async (req, res) => {
         altText_en: img.alt_text_en,
         altText_hi: img.alt_text_hi,
 
-        imageUrl: img.image_url,
+        imageUrl:
+          `${process.env.MINIO_ENDPOINT}/gallery-images/${img.image}`,
       })
     );
 
@@ -108,182 +161,22 @@ router.get('/gallery', async (req, res) => {
   }
 });
 
-/**
- * =========================================
- * PUT /gallery
- * =========================================
- */
 
-router.put('/gallery', async (req, res) => {
-  try {
+// ======================================================
+// UPDATE GALLERY
+// ======================================================
 
-    console.log(req.body);
+router.put(
 
-    const {
+  '/gallery',
 
-      heading_en,
-      heading_hi,
+  upload.array('images'),
 
-      description_en,
-      description_hi,
+  async (req, res) => {
 
-      images,
-
-    } = req.body;
-
-    /**
-     * =========================
-     * VALIDATION
-     * =========================
-     */
-
-    if (!Array.isArray(images)) {
-      return res.status(400).json({
-        success: false,
-        error: 'Images must be an array',
-      });
-    }
-
-    /**
-     * =========================
-     * SECTION
-     * =========================
-     */
-
-    // REMOVE OLD SECTION
-    await pool.query(`
-      DELETE FROM gallery_section
-    `);
-
-    // INSERT NEW SECTION
-    await pool.query(
-      `
-      INSERT INTO gallery_section
-      (
-
-        heading_en,
-        heading_hi,
-
-        description_en,
-        description_hi
-
-      )
-      VALUES ($1, $2, $3, $4)
-      `,
-      [
-
-        heading_en || '',
-        heading_hi || '',
-
-        description_en || '',
-        description_hi || '',
-
-      ]
-    );
-
-    /**
-     * =========================
-     * IMAGES
-     * =========================
-     */
-
-    // REMOVE OLD IMAGES
-    await pool.query(`
-      DELETE FROM gallery_images
-    `);
-
-    const insertedImages = [];
-
-    for (const item of images) {
+    try {
 
       const {
-
-        title_en,
-        title_hi,
-
-        category_en,
-        category_hi,
-
-        altText_en,
-        altText_hi,
-
-        imageUrl,
-
-      } = item;
-
-      const result = await pool.query(
-        `
-        INSERT INTO gallery_images
-        (
-
-          title_en,
-          title_hi,
-
-          category_en,
-          category_hi,
-
-          alt_text_en,
-          alt_text_hi,
-
-          image_url
-
-        )
-        VALUES
-        (
-          $1, $2,
-          $3, $4,
-          $5, $6,
-          $7
-        )
-        RETURNING *
-        `,
-        [
-
-          title_en || '',
-          title_hi || '',
-
-          category_en || '',
-          category_hi || '',
-
-          altText_en || '',
-          altText_hi || '',
-
-          imageUrl || '',
-
-        ]
-      );
-
-      insertedImages.push({
-
-        id: result.rows[0].id,
-
-        title_en:
-          result.rows[0].title_en,
-
-        title_hi:
-          result.rows[0].title_hi,
-
-        category_en:
-          result.rows[0].category_en,
-
-        category_hi:
-          result.rows[0].category_hi,
-
-        altText_en:
-          result.rows[0].alt_text_en,
-
-        altText_hi:
-          result.rows[0].alt_text_hi,
-
-        imageUrl:
-          result.rows[0].image_url,
-      });
-    }
-
-    res.json({
-      success: true,
-
-      data: {
 
         heading_en,
         heading_hi,
@@ -291,22 +184,188 @@ router.put('/gallery', async (req, res) => {
         description_en,
         description_hi,
 
-        images: insertedImages,
-      },
-    });
+      } = req.body;
 
-  } catch (err) {
+      const parsedImages =
+        JSON.parse(req.body.images);
 
-    console.error(
-      'PUT /gallery error:',
-      err
-    );
+      // =====================================
+      // UPDATE SECTION
+      // =====================================
 
-    res.status(500).json({
-      success: false,
-      error: err.message,
-    });
+      await pool.query(`
+        DELETE FROM gallery_section
+      `);
+
+      await pool.query(
+
+        `
+        INSERT INTO gallery_section
+        (
+
+          heading_en,
+          heading_hi,
+
+          description_en,
+          description_hi
+
+        )
+        VALUES ($1, $2, $3, $4)
+        `,
+
+        [
+
+          heading_en || '',
+          heading_hi || '',
+
+          description_en || '',
+          description_hi || '',
+        ]
+      );
+
+      // =====================================
+      // DELETE OLD MINIO FILES
+      // =====================================
+
+      const oldImages = await pool.query(`
+        SELECT *
+        FROM gallery_images
+      `);
+
+      for (const oldImage of oldImages.rows) {
+
+        if (oldImage.image) {
+
+          const deleteCommand =
+            new DeleteObjectCommand({
+
+              Bucket: 'gallery-images',
+
+              Key: oldImage.image,
+            });
+
+          await s3Client.send(deleteCommand);
+        }
+      }
+
+      // =====================================
+      // DELETE OLD DB IMAGES
+      // =====================================
+
+      await pool.query(`
+        DELETE FROM gallery_images
+      `);
+
+      const insertedImages = [];
+
+      for (let i = 0; i < parsedImages.length; i++) {
+
+        const item = parsedImages[i];
+
+        let imageName = '';
+
+        if (req.files && req.files[i]) {
+          imageName = req.files[i].key;
+        }
+
+        const result = await pool.query(
+
+          `
+          INSERT INTO gallery_images
+          (
+
+            title_en,
+            title_hi,
+
+            category_en,
+            category_hi,
+
+            alt_text_en,
+            alt_text_hi,
+
+            image
+
+          )
+          VALUES
+          (
+            $1, $2,
+            $3, $4,
+            $5, $6,
+            $7
+          )
+          RETURNING *
+          `,
+
+          [
+
+            item.title_en || '',
+            item.title_hi || '',
+
+            item.category_en || '',
+            item.category_hi || '',
+
+            item.altText_en || '',
+            item.altText_hi || '',
+
+            imageName,
+          ]
+        );
+
+        insertedImages.push({
+
+          id: result.rows[0].id,
+
+          title_en:
+            result.rows[0].title_en,
+
+          title_hi:
+            result.rows[0].title_hi,
+
+          category_en:
+            result.rows[0].category_en,
+
+          category_hi:
+            result.rows[0].category_hi,
+
+          altText_en:
+            result.rows[0].alt_text_en,
+
+          altText_hi:
+            result.rows[0].alt_text_hi,
+
+          imageUrl:
+            `${process.env.MINIO_ENDPOINT}/gallery-images/${result.rows[0].image}`,
+        });
+      }
+
+      res.json({
+        success: true,
+
+        data: {
+
+          heading_en,
+          heading_hi,
+
+          description_en,
+          description_hi,
+
+          images: insertedImages,
+        },
+      });
+
+    } catch (err) {
+
+      console.error(
+        'PUT /gallery error:',
+        err
+      );
+
+      res.status(500).json({
+        success: false,
+        error: err.message,
+      });
+    }
   }
-});
+);
 
 module.exports = router;

@@ -1,12 +1,67 @@
 const express = require('express');
-const router = express.Router();
-const pool = require('../db/db');
 
-/**
- * =========================
- * GET /director
- * =========================
- */
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+
+const path = require('path');
+
+const pool = require('../db/db');
+const s3Client = require('../db/minio');
+
+const router = express.Router();
+
+
+// ======================================================
+// MULTER S3 CONFIG (MinIO Compatible)
+// ======================================================
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3Client,
+    bucket: 'director-images',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+
+    metadata: (req, file, cb) => {
+      cb(null, {
+        fieldName: file.fieldname,
+      });
+    },
+
+    key: (req, file, cb) => {
+      const uniqueName =
+        Date.now() +
+        '-' +
+        Math.round(Math.random() * 1e9) +
+        path.extname(file.originalname);
+
+      cb(null, uniqueName);
+    },
+  }),
+
+  limits: {
+    fileSize: 5 * 1024 * 1024,
+  },
+
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/webp',
+      'image/jpg',
+    ];
+
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error('Only JPG, PNG and WEBP images are allowed'));
+    }
+
+    cb(null, true);
+  },
+});
+
+
+// ======================================================
+// GET /director
+// ======================================================
 
 router.get('/director', async (req, res) => {
   try {
@@ -17,28 +72,21 @@ router.get('/director', async (req, res) => {
       LIMIT 1
     `);
 
-    // NO DATA
     if (result.rows.length === 0) {
       return res.json({
         success: true,
         data: {
           image: '',
-
           label_en: '',
           label_hi: '',
-
           heading_en: '',
           heading_hi: '',
-
           name_en: '',
           name_hi: '',
-
           designation_en: '',
           designation_hi: '',
-
           institute_en: '',
           institute_hi: '',
-
           message_en: '',
           message_hi: '',
         },
@@ -47,10 +95,13 @@ router.get('/director', async (req, res) => {
 
     const row = result.rows[0];
 
-    res.json({
+    return res.json({
       success: true,
       data: {
-        image: row.image || '',
+        image:
+          row.image
+            ? `${process.env.MINIO_ENDPOINT}/director-images/${row.image}`
+            : '',
 
         label_en: row.label_en || '',
         label_hi: row.label_hi || '',
@@ -71,6 +122,7 @@ router.get('/director', async (req, res) => {
         message_hi: row.message_hi || '',
       },
     });
+
   } catch (err) {
     console.error('GET /director error:', err);
 
@@ -81,171 +133,159 @@ router.get('/director', async (req, res) => {
   }
 });
 
-/**
- * =========================
- * PUT /director
- * =========================
- */
 
-router.put('/director', async (req, res) => {
-  try {
-    const {
-      image,
+// ======================================================
+// PUT /director
+// ======================================================
 
-      label_en,
-      label_hi,
+router.put(
+  '/director',
+  upload.single('image'),
+  async (req, res) => {
+    try {
+      const {
+        label_en,
+        label_hi,
+        heading_en,
+        heading_hi,
+        name_en,
+        name_hi,
+        designation_en,
+        designation_hi,
+        institute_en,
+        institute_hi,
+        message_en,
+        message_hi,
+      } = req.body;
 
-      heading_en,
-      heading_hi,
+      // MinIO gives file key automatically (like gallery.js)
+      const imageName = req.file ? req.file.key : '';
 
-      name_en,
-      name_hi,
+      // CHECK EXISTING ROW
+      const existing = await pool.query(`
+        SELECT id FROM director
+        LIMIT 1
+      `);
 
-      designation_en,
-      designation_hi,
+      let result;
 
-      institute_en,
-      institute_hi,
+      // =========================
+      // UPDATE
+      // =========================
+      if (existing.rows.length > 0) {
+        result = await pool.query(
+          `
+          UPDATE director
+          SET
+            image = $1,
 
-      message_en,
-      message_hi,
-    } = req.body;
+            label_en = $2,
+            label_hi = $3,
 
-    // CHECK EXISTING ROW
-    const existing = await pool.query(`
-      SELECT id FROM director
-      LIMIT 1
-    `);
+            heading_en = $4,
+            heading_hi = $5,
 
-    let result;
+            name_en = $6,
+            name_hi = $7,
 
-    // UPDATE
-    if (existing.rows.length > 0) {
-      result = await pool.query(
-        `
-        UPDATE director
-        SET
-          image = $1,
+            designation_en = $8,
+            designation_hi = $9,
 
-          label_en = $2,
-          label_hi = $3,
+            institute_en = $10,
+            institute_hi = $11,
 
-          heading_en = $4,
-          heading_hi = $5,
+            message_en = $12,
+            message_hi = $13,
 
-          name_en = $6,
-          name_hi = $7,
+            "updatedAt" = NOW()
 
-          designation_en = $8,
-          designation_hi = $9,
+          WHERE id = $14
 
-          institute_en = $10,
-          institute_hi = $11,
+          RETURNING *
+          `,
+          [
+            imageName,
 
-          message_en = $12,
-          message_hi = $13,
+            label_en || '',
+            label_hi || '',
+            heading_en || '',
+            heading_hi || '',
+            name_en || '',
+            name_hi || '',
+            designation_en || '',
+            designation_hi || '',
+            institute_en || '',
+            institute_hi || '',
+            message_en || '',
+            message_hi || '',
 
-          "updatedAt" = NOW()
+            existing.rows[0].id,
+          ]
+        );
+      }
 
-        WHERE id = $14
-
-        RETURNING *
-        `,
-        [
-          image || '',
-
-          label_en || '',
-          label_hi || '',
-
-          heading_en || '',
-          heading_hi || '',
-
-          name_en || '',
-          name_hi || '',
-
-          designation_en || '',
-          designation_hi || '',
-
-          institute_en || '',
-          institute_hi || '',
-
-          message_en || '',
-          message_hi || '',
-
-          existing.rows[0].id,
-        ]
-      );
-    } else {
+      // =========================
       // INSERT
-      result = await pool.query(
-        `
-        INSERT INTO director
-        (
-          image,
+      // =========================
+      else {
+        result = await pool.query(
+          `
+          INSERT INTO director
+          (
+            image,
+            label_en,
+            label_hi,
+            heading_en,
+            heading_hi,
+            name_en,
+            name_hi,
+            designation_en,
+            designation_hi,
+            institute_en,
+            institute_hi,
+            message_en,
+            message_hi
+          )
+          VALUES
+          (
+            $1,$2,$3,$4,$5,$6,$7,
+            $8,$9,$10,$11,$12,$13
+          )
+          RETURNING *
+          `,
+          [
+            imageName,
 
-          label_en,
-          label_hi,
+            label_en || '',
+            label_hi || '',
+            heading_en || '',
+            heading_hi || '',
+            name_en || '',
+            name_hi || '',
+            designation_en || '',
+            designation_hi || '',
+            institute_en || '',
+            institute_hi || '',
+            message_en || '',
+            message_hi || '',
+          ]
+        );
+      }
 
-          heading_en,
-          heading_hi,
+      return res.json({
+        success: true,
+        data: result.rows[0],
+      });
 
-          name_en,
-          name_hi,
+    } catch (err) {
+      console.error('PUT /director error:', err);
 
-          designation_en,
-          designation_hi,
-
-          institute_en,
-          institute_hi,
-
-          message_en,
-          message_hi
-        )
-
-        VALUES
-        (
-          $1,$2,$3,$4,$5,$6,$7,
-          $8,$9,$10,$11,$12,$13
-        )
-
-        RETURNING *
-        `,
-        [
-          image || '',
-
-          label_en || '',
-          label_hi || '',
-
-          heading_en || '',
-          heading_hi || '',
-
-          name_en || '',
-          name_hi || '',
-
-          designation_en || '',
-          designation_hi || '',
-
-          institute_en || '',
-          institute_hi || '',
-
-          message_en || '',
-          message_hi || '',
-        ]
-      );
+      res.status(500).json({
+        success: false,
+        error: err.message,
+      });
     }
-
-    res.json({
-      success: true,
-      data: result.rows[0],
-    });
-  } catch (err) {
-    console.error('PUT /director error:', err);
-
-    res.status(500).json({
-      success: false,
-      error: err.message,
-    });
   }
-});
+);
 
 module.exports = router;
