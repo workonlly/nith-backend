@@ -1,0 +1,281 @@
+NITH Backend - Route Flow Map
+=============================
+
+This file shows where every request goes in the current backend.
+
+1) ROOT ENTRY
+-------------
+File: index.js
+
+Middleware order:
+- dotenv loads env from ./src/.env
+- cors()
+- express.json()
+
+Mounted routes:
+- / -> inline hello route
+- /v1 -> src/routes/v1/index.js
+- /auth -> src/routes/authetication.js
+- /hero -> src/homepage/hero.js
+- /event -> src/homepage/event.js
+- /downloads -> src/downloads/download.js
+- /history -> src/aboutnith/history.js
+- /api/upload -> inline upload route using src/middlewares/minio.js
+
+2) DIRECT ROOT ROUTES
+---------------------
+GET /
+- index.js
+- Response: Hello from Express!
+
+POST /api/upload
+- index.js
+- Middleware: upload.single('file') from src/middlewares/minio.js
+- Storage: MinIO bucket images
+- Response: { success: true, url: req.file.location }
+
+3) /V1 ROUTE TREE
+-----------------
+File: src/routes/v1/index.js
+
+Mounted children:
+- /v1/about-nith -> src/routes/about-nith/index.js
+- /v1/academics -> src/routes/academics/index.js
+- /v1/administration -> src/routes/administration/index.js
+- /v1/alumni -> src/routes/alumni/index.js
+- /v1/authorities -> src/routes/authorities/index.js
+- /v1/departments -> src/routes/departments/index.js
+- /v1/downloads -> src/routes/downloads/index.js
+- /v1/faculty -> src/routes/faculty/index.js
+- /v1/students -> src/routes/students/index.js
+
+4) ABOUT NITH FLOW
+------------------
+Public route:
+- /v1/about-nith/*
+
+File: src/routes/about-nith/index.js
+Handlers:
+- GET /v1/about-nith/ -> aboutNithController.getAllAboutNith
+- GET /v1/about-nith/:id -> aboutNithController.getAboutNithById
+- POST /v1/about-nith/ -> aboutNithController.createAboutNith
+- PUT /v1/about-nith/:id -> aboutNithController.updateAboutNith
+- DELETE /v1/about-nith/:id -> aboutNithController.deleteAboutNith
+
+Data layer:
+- src/controllers/aboutNithController.js
+- src/db/db.js
+- Table: aboutnith
+
+5) ADMINISTRATION / ACCOUNTS FLOW
+----------------------------------
+Public route:
+- /v1/administration/accounts/*
+
+File: src/routes/administration/index.js
+- Mounts /accounts -> src/routes/administration/accounts.js
+
+File: src/routes/administration/accounts.js
+Handlers:
+- /category CRUD -> accountsController category methods
+- /role-position CRUD -> accountsController role_position methods
+- /faculty CRUD -> accountsController faculty methods
+- /faculty-role CRUD -> accountsController faculty_role_assignment methods
+
+Data layer:
+- src/controllers/accountsController.js
+- src/db/db.js
+- Tables:
+  - category
+  - role_position
+  - faculty
+  - faculty_role_assignment
+
+6) HERO FLOW
+------------
+Public route:
+- /hero/*
+
+File: src/homepage/hero.js
+Handlers:
+- GET /hero/homepage
+- PUT /hero/homepage
+- GET /hero/hero-image
+- POST /hero/hero-image
+- DELETE /hero/hero-image/:id
+
+Data layer:
+- src/db/db.js
+- src/db/minio.js
+- Tables:
+  - homepage
+  - hero_image
+
+MinIO behavior:
+- Upload images to bucket images
+- Store returned file URL in database
+- Delete old file from MinIO when image is replaced or removed
+
+7) DOWNLOADS FLOW
+-----------------
+Public route:
+- /downloads/*
+
+File: src/downloads/download.js
+Handlers:
+- GET /downloads/
+- POST /downloads/
+- PUT /downloads/:id
+- DELETE /downloads/:id
+
+Upload fields:
+- pdf_file -> required
+- word_file -> optional
+
+Data layer:
+- src/db/db.js
+- src/db/minio.js
+- Table: ug_tables
+
+MinIO behavior:
+- Bucket: downloads
+- Upload PDF/Word files
+- Replace old files on update
+- Delete files from MinIO on delete
+
+8) HISTORY FLOW
+---------------
+Public route:
+- /history/*
+
+File: src/aboutnith/history.js
+Handlers:
+- GET /history/
+- PUT /history/
+- GET /history/timeline
+- POST /history/timeline
+- PUT /history/timeline/:id
+- DELETE /history/timeline/:id
+
+Data layer:
+- src/db/db.js
+- Tables:
+  - aboutnith_history
+  - aboutnith_history_timeline
+
+Behavior:
+- Main history is singleton-like: one active row
+- Timeline uses reference_id to link to the main history row
+
+9) AUTH FLOW
+------------
+Mounted route:
+- /auth/* -> src/routes/authetication.js
+
+Current status:
+- src/routes/authetication.js is empty right now
+
+Real auth code exists in:
+- src/routes/auth.js
+
+That file contains:
+- POST /login
+- GET /me
+- GET /verify
+
+But it is not mounted in index.js.
+
+Auth middleware:
+- src/middlewares/auth.js
+- Reads Bearer token from Authorization header
+- Verifies JWT with process.env.JWT_SECRET
+
+10) FACULTY FLOW
+----------------
+Real code exists in:
+- src/routes/faculty.js
+
+Handlers there:
+- GET /faculty/ (protected)
+- GET /faculty/my-roles (protected)
+
+But this file is not mounted from index.js.
+
+11) AUTHORITIES FLOW
+--------------------
+Mounted route:
+- /v1/authorities/* -> src/routes/authorities/index.js
+
+Current status:
+- src/routes/authorities/index.js is a placeholder router
+
+Real CRUD code exists in:
+- src/authorities/links.js
+
+That file includes:
+- GET /authorities
+- POST /authorities
+- PUT /authorities/:id
+- DELETE /authorities/:id
+
+It uses MinIO uploads and deletes, but it is not mounted in index.js.
+
+12) PLACEHOLDER ROUTES
+----------------------
+These are currently scaffold routers and mostly return sample JSON:
+- src/routes/academics/index.js
+- src/routes/alumni/index.js
+- src/routes/departments/index.js
+- src/routes/downloads/index.js
+- src/routes/faculty/index.js
+- src/routes/students/index.js
+- src/routes/authorities/index.js
+- src/routes/administration/index.js has some real mounting but also placeholder-style routes
+- src/routes/authetication.js is empty
+- src/homepage/event.js is empty
+
+13) DATA ACCESS LAYER
+---------------------
+Postgres:
+- src/db/db.js
+- Uses pg Pool
+- Reads DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT
+
+MinIO:
+- src/db/minio.js
+- Uses S3Client from @aws-sdk/client-s3
+- Reads MINIO_ENDPOINT, MINIO_REGION, MINIO_ACCESS_KEY, MINIO_SECRET_KEY
+
+14) CURRENTLY WORKING FLOW SUMMARY
+----------------------------------
+Live working routes today:
+- GET /
+- POST /api/upload
+- /v1/about-nith/*
+- /v1/administration/accounts/*
+- /hero/*
+- /downloads/*
+- /history/*
+
+Unfinished or not mounted:
+- /auth/* is mounted but empty
+- /v1/authorities/* is placeholder
+- /v1/faculty/* is placeholder
+- /event/* is empty
+- src/routes/auth.js is real but not mounted
+- src/routes/faculty.js is real but not mounted
+- src/authorities/links.js is real but not mounted
+
+15) SIMPLE REQUEST PATH EXAMPLES
+-------------------------------
+Example A: GET /history/timeline
+- Client -> index.js -> /history -> src/aboutnith/history.js -> Postgres -> JSON response
+
+Example B: POST /api/upload
+- Client -> index.js -> src/middlewares/minio.js -> MinIO bucket images -> JSON response
+
+Example C: PUT /downloads/:id
+- Client -> index.js -> src/downloads/download.js -> Postgres + MinIO -> JSON response
+
+Example D: GET /v1/about-nith/
+- Client -> index.js -> src/routes/v1/index.js -> src/routes/about-nith/index.js -> aboutNithController -> Postgres -> JSON response
