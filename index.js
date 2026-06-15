@@ -7,7 +7,6 @@ const authroute = require('./src/routes/authetication');
 const upload = require('./src/middlewares/minio');
 const hero=require('./src/homepage/hero');
 const event=require('./src/homepage/event');
-const historyRoutes = require('./src/aboutnith/history');
 const PORT = process.env.PORT || 4000;
 
 // ── About NITH routes ──────────────────────────────────────────────────────
@@ -47,8 +46,6 @@ app.use('/auth', authroute);
 app.use('/hero', hero);
 app.use('/event', event);
 
-// ── Downloads routes ───────────────────────────────────────────────────────
-app.use('/downloads', downloads);
 
 // ── About NITH routes ──────────────────────────────────────────────────────
 app.use('/history',      historyRoutes);
