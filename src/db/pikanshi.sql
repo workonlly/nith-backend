@@ -30,3 +30,40 @@ CREATE TABLE download_page_meta (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- =========================
+-- GALLERY SECTION TABLE
+-- =========================
+
+CREATE TABLE gallery_section (
+  id SERIAL PRIMARY KEY,
+
+    heading_en TEXT DEFAULT '',
+    heading_hi TEXT DEFAULT '',
+
+    description_en TEXT DEFAULT '',
+    description_hi TEXT DEFAULT '',
+
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW());
+
+-- =========================
+-- GALLERY IMAGES TABLE
+-- =========================
+
+CREATE TABLE gallery_images (
+   id SERIAL PRIMARY KEY,
+
+    title_en TEXT DEFAULT '',
+    title_hi TEXT DEFAULT '',
+
+    category_en TEXT DEFAULT '',
+    category_hi TEXT DEFAULT '',
+
+    alt_text_en TEXT DEFAULT '',
+    alt_text_hi TEXT DEFAULT '',
+
+    image_url TEXT DEFAULT '',
+
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW());
