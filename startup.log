@@ -471,3 +471,99 @@ Server started at 2026-05-29T09:06:34.350Z on port 5000. process.env.PORT is 500
 [DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 18ms
 [DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 14ms
 [DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 5ms
+Server started at 2026-06-11T09:01:03.704Z on port 5000. process.env.PORT is 5000
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
+      INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
+      VALUES (1, $1, $2)
+      ON CONFLICT (id) DO UPDATE SET
+        hero_heading = EXCLUDED.hero_heading,
+        hero_subheading = EXCLUDED.hero_subheading
+      RETURNING *
+    
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
+      INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
+      VALUES (1, $1, $2)
+      ON CONFLICT (id) DO UPDATE SET
+        hero_heading = EXCLUDED.hero_heading,
+        hero_subheading = EXCLUDED.hero_subheading
+      RETURNING *
+    
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_visitors (name, title, description, website_label, website_url) VALUES ($1, $2, $3, $4, $5) RETURNING *
+[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_visitors (name, title, description, website_label, website_url) VALUES ($1, $2, $3, $4, $5) RETURNING *
+Server started at 2026-06-11T09:21:46.439Z on port 5000. process.env.PORT is 5000
+[DB Query] SUCCESS: INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
+      VALUES (1, $1, $2... | Duration: 43ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 42ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 45ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 3ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
+      VALUES (1, $1, $2... | Duration: 7ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 14ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 14ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 19ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 18ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 56ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 29ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
+      VALUES (1, $1, $2... | Duration: 34ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
+      VALUES (1, $1, $2... | Duration: 58ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 7ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 36ms
+[DB Query] SUCCESS: INSERT INTO administration_visitors (name, title, description, website_label, website_url) VALUES ($... | Duration: 32ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_vigilance ORDER BY id... | Duration: 11ms
+[DB Query] SUCCESS: SELECT * FROM administration_vigilance ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_vigilance_downloads ORDER BY id... | Duration: 48ms
+[DB Query] SUCCESS: SELECT * FROM administration_vigilance_downloads ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_chairperson_former ORDER BY id DESC... | Duration: 13ms
+[DB Query] SUCCESS: SELECT * FROM administration_chairperson_former ORDER BY id DESC... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 22ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 0ms
+[DB Query] SUCCESS: SELECT * FROM administration_institute_coordinators ORDER BY id... | Duration: 4ms
+[DB Query] SUCCESS: SELECT * FROM administration_institute_coordinators_info LIMIT 1... | Duration: 11ms
+[DB Query] SUCCESS: SELECT * FROM administration_institute_coordinators ORDER BY id... | Duration: 9ms
+[DB Query] SUCCESS: SELECT * FROM administration_institute_coordinators_info LIMIT 1... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 17ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_chairperson_former ORDER BY id DESC... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_chairperson_former ORDER BY id DESC... | Duration: 1ms
+[DB Query] SUCCESS: INSERT INTO chairperson (id, title, name, description, dates, image)
+      VALUES ($1, $2, $3, $4, $... | Duration: 5ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 21ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_former_directors ORDER BY id... | Duration: 4ms
+[DB Query] SUCCESS: SELECT * FROM administration_director_office ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_former_directors ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_director_office ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM chairperson ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_chairperson_former ORDER BY id DESC... | Duration: 12ms
+[DB Query] SUCCESS: SELECT * FROM administration_chairperson_former ORDER BY id DESC... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_former_directors ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 6ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 1ms
+[DB Query] SUCCESS: SELECT * FROM administration_former_directors ORDER BY id... | Duration: 2ms
+[DB Query] SUCCESS: SELECT * FROM administration_director_office ORDER BY id... | Duration: 16ms
+[DB Query] SUCCESS: SELECT * FROM administration_director_office ORDER BY id... | Duration: 1ms
+[DB Query] SUCCESS: INSERT INTO administration_director (id, hero_heading, hero_subheading, current_name, current_design... | Duration: 18ms
+[DB Query] SUCCESS: SELECT * FROM administration_director LIMIT 1... | Duration: 2ms
