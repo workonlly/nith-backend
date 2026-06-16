@@ -3,7 +3,7 @@ const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
 const pool = require('../db/db');
 const s3Client = require('../db/minio');
 
-const { uploadAuthorities, AUTHORITY_BUCKET } = require('../middleware/upload');
+const { uploadAuthorities, AUTHORITY_BUCKET } = require('../middlewares/minio');
 
 const router = express.Router();
 const uploadFile = uploadAuthorities.single('file');

@@ -38,6 +38,7 @@ app.use('/bog',bogRoute);
 app.use('/senate',sentaeRoute);
 app.use('/bwc',buildingRoute);
 app.use('/fc',fcRoute);
+
 // Basic route
 app.get('/', (req, res) => {
   res.send('Hello from Express!');
