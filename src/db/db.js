@@ -1,6 +1,9 @@
-require('dotenv').config();
-
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 const { Pool } = require('pg');
+const fs = require('fs');
+const path = require('path');
+
+const logFile = path.resolve(__dirname, '../../startup.log');
 
 
 
@@ -20,6 +23,26 @@ pool.connect()
     console.error('❌ PostgreSQL Connection Error:', err.message);
   });
 
+pool.on('error', (err) => {
+  const msg = `[DB Error] Unexpected pool error: ${err.message}\n`;
+  console.error(msg);
+  fs.appendFileSync(logFile, msg);
+});
+
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+  query: async (text, params) => {
+    const start = Date.now();
+    try {
+      const res = await pool.query(text, params);
+      const duration = Date.now() - start;
+      const msg = `[DB Query] SUCCESS: ${text.trim().substring(0, 100)}... | Duration: ${duration}ms\n`;
+      fs.appendFileSync(logFile, msg);
+      return res;
+    } catch (err) {
+      const msg = `[DB Query] ERROR: ${err.message} on query: ${text}\n`;
+      console.error(msg);
+      fs.appendFileSync(logFile, msg);
+      throw err;
+    }
+  },
 };
