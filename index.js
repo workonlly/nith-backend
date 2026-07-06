@@ -5,9 +5,8 @@ const app = express();
 const v1Routes = require('./src/routes/v1');
 const authroute = require('./src/routes/authetication');
 const upload = require('./src/middlewares/minio');
-const hero = require('./src/homepage/hero');
-const event = require('./src/homepage/event');
-const downloads = require('./src/downloads/download');
+const hero=require('./src/homepage/hero');
+const event=require('./src/homepage/event');
 const PORT = process.env.PORT || 4000;
 
 // ── About NITH routes ──────────────────────────────────────────────────────
@@ -27,6 +26,17 @@ const fcRoutes       = require('./src/authorities/finance_commitee'); // Finance
 // Middleware
 app.use(cors());               // Enable CORS for all routes
 app.use(express.json());       // Parse JSON bodies
+app.use('/v1', v1Routes);
+app.use('/auth',authroute);
+app.use('/hero',hero);
+app.use('/event',event);
+
+app.use('/history', historyRoutes);
+// Basic route
+app.get('/', (req, res) => {
+  res.send('Hello from Express!');
+});
+
 
 // ── Core API routes (versioned) ────────────────────────────────────────────
 app.use('/v1', v1Routes);
@@ -36,8 +46,6 @@ app.use('/auth', authroute);
 app.use('/hero', hero);
 app.use('/event', event);
 
-// ── Downloads routes ───────────────────────────────────────────────────────
-app.use('/downloads', downloads);
 
 // ── About NITH routes ──────────────────────────────────────────────────────
 app.use('/history',      historyRoutes);

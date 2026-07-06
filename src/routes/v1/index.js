@@ -22,6 +22,9 @@ router.use('/departments', require('../departments'));
 // Downloads routes
 router.use('/downloads', require('../downloads'));
 
+//Homepage routes
+router.use('/homepage/gallery', require('../../homepage/gallery'));
+
 // Faculty routes
 router.use('/faculty', require('../faculty'));
 
