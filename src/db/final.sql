@@ -108,6 +108,32 @@ CREATE TABLE IF NOT EXISTS gallery (
 );
 
 
+--========================================================
+
+-- main faculty loading table 
+CREATE TABLE IF NOT EXISTS faculties_table (
+    id SERIAL PRIMARY KEY,
+    name_en VARCHAR(255) NOT NULL,
+    name_hi VARCHAR(255) NOT NULL,
+    role_en VARCHAR(255) NOT NULL,
+    role_hi VARCHAR(255) NOT NULL,
+    designation_en VARCHAR(255) NOT NULL,
+    designation_hi VARCHAR(255) NOT NULL,
+    department_en VARCHAR(255) NOT NULL,
+    department_hi VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_no VARCHAR(255) NOT NULL,
+    faculty_id VARCHAR(255) NOT NULL,
+    since_date_en VARCHAR(255) NOT NULL,
+    since_date_hi VARCHAR(255) NOT NULL,
+    end_date_en VARCHAR(255) NOT NULL,
+    end_date_hi VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    tag VARCHAR(255) NOT NULL
+);
+
 -- ===============================================================
 -- Faculty distribution here
 
