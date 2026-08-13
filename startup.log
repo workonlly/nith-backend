@@ -171,3 +171,12 @@ Server started at 2026-08-13T21:48:09.143Z on port 4000. process.env.PORT is 400
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 5086ms
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4288ms
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4290ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3366ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3401ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3404ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3408ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3481ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 288ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3408ms
+[DB Query] SUCCESS: SELECT * FROM faculties_forwarding_heading ORDER BY id DESC LIMIT 1... | Duration: 3582ms
+[DB Query] SUCCESS: SELECT * FROM faculties_forwarding_list ORDER BY id DESC... | Duration: 509ms
