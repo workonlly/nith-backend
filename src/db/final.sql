@@ -2221,3 +2221,378 @@ CREATE TABLE IF NOT EXISTS department_research_supervision(
 
 -- ========================================================================
 -- academics
+-- ==========================================
+-- ABOUT NITH: HISTORY
+-- ==========================================
+CREATE TABLE IF NOT EXISTS aboutnith_history (
+    id SERIAL PRIMARY KEY,
+    description1_en TEXT,
+    description2_en TEXT,
+    legacy_en TEXT,
+    description1_hi TEXT,
+    description2_hi TEXT,
+    legacy_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS aboutnith_history_timeline (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES aboutnith_history(id) ON DELETE CASCADE,
+    year VARCHAR(255),
+    event_date VARCHAR(255),
+    subtitle_en VARCHAR(255),
+    title_en VARCHAR(255),
+    description_en TEXT,
+    subtitle_hi VARCHAR(255),
+    title_hi VARCHAR(255),
+    description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- ABOUT NITH: CORE VALUES
+-- ==========================================
+CREATE TABLE IF NOT EXISTS core_values_page (
+    id SERIAL PRIMARY KEY,
+    hero_heading_en VARCHAR(255),
+    hero_heading_hi VARCHAR(255),
+    hero_description_en TEXT,
+    hero_description_hi TEXT,
+    pillars_label_en VARCHAR(255),
+    pillars_label_hi VARCHAR(255),
+    pillars_heading_en VARCHAR(255),
+    pillars_heading_hi VARCHAR(255),
+    pillars_subtitle_en VARCHAR(255),
+    pillars_subtitle_hi VARCHAR(255),
+    practice_label_en VARCHAR(255),
+    practice_label_hi VARCHAR(255),
+    practice_heading_en VARCHAR(255),
+    practice_heading_hi VARCHAR(255),
+    practice_subtitle_en VARCHAR(255),
+    practice_subtitle_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS core_values (
+    id SERIAL PRIMARY KEY,
+    page_id INTEGER REFERENCES core_values_page(id) ON DELETE CASCADE,
+    title_en VARCHAR(255),
+    title_hi VARCHAR(255),
+    description_en TEXT,
+    description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS practice_paragraphs (
+    id SERIAL PRIMARY KEY,
+    page_id INTEGER REFERENCES core_values_page(id) ON DELETE CASCADE,
+    paragraph_en TEXT,
+    paragraph_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- ABOUT NITH: VISION & MISSION
+-- ==========================================
+CREATE TABLE IF NOT EXISTS vision_mission (
+    id SERIAL PRIMARY KEY,
+    guiding_principles_heading_en VARCHAR(255),
+    guiding_principles_heading_hi VARCHAR(255),
+    guiding_principles_description_en TEXT,
+    guiding_principles_description_hi TEXT,
+    vision_heading_en VARCHAR(255),
+    vision_heading_hi VARCHAR(255),
+    vision_subtitle_en VARCHAR(255),
+    vision_subtitle_hi VARCHAR(255),
+    vision_description_en TEXT,
+    vision_description_hi TEXT,
+    strategic_objectives_heading_en VARCHAR(255),
+    strategic_objectives_heading_hi VARCHAR(255),
+    mission_heading_en VARCHAR(255),
+    mission_heading_hi VARCHAR(255),
+    mission_subtitle_en VARCHAR(255),
+    mission_subtitle_hi VARCHAR(255),
+    tagline_en VARCHAR(255),
+    tagline_hi VARCHAR(255),
+    tagline_description_en TEXT,
+    tagline_description_hi TEXT,
+    legacy_heading_en VARCHAR(255),
+    legacy_heading_hi VARCHAR(255),
+    legacy_subheading_en VARCHAR(255),
+    legacy_subheading_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS vision_mission_pillars (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES vision_mission(id) ON DELETE CASCADE,
+    title_en VARCHAR(255),
+    title_hi VARCHAR(255),
+    description_en TEXT,
+    description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS vision_mission_legacy_stats (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES vision_mission(id) ON DELETE CASCADE,
+    value_en VARCHAR(255),
+    value_hi VARCHAR(255),
+    label_en VARCHAR(255),
+    label_hi VARCHAR(255),
+    description_en TEXT,
+    description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- ABOUT NITH: CONNECTIVITY
+-- ==========================================
+CREATE TABLE IF NOT EXISTS connectivity_page (
+    id SERIAL PRIMARY KEY,
+    hero_heading_en VARCHAR(255),
+    hero_heading_hi VARCHAR(255),
+    hero_description_en TEXT,
+    hero_description_hi TEXT,
+    travel_options_label_en VARCHAR(255),
+    travel_options_label_hi VARCHAR(255),
+    travel_options_heading_en VARCHAR(255),
+    travel_options_heading_hi VARCHAR(255),
+    travel_options_subtitle_en VARCHAR(255),
+    travel_options_subtitle_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS travel_options (
+    id SERIAL PRIMARY KEY,
+    page_id INTEGER REFERENCES connectivity_page(id) ON DELETE CASCADE,
+    icon VARCHAR(255),
+    title_en VARCHAR(255),
+    title_hi VARCHAR(255),
+    nearest_point_label_en VARCHAR(255),
+    nearest_point_label_hi VARCHAR(255),
+    nearest_point_value_en VARCHAR(255),
+    nearest_point_value_hi VARCHAR(255),
+    distance_label_en VARCHAR(255),
+    distance_label_hi VARCHAR(255),
+    distance_value_en VARCHAR(255),
+    distance_value_hi VARCHAR(255),
+    travel_time_en VARCHAR(255),
+    travel_time_hi VARCHAR(255),
+    services_label_en VARCHAR(255),
+    services_label_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS travel_service_paragraphs (
+    id SERIAL PRIMARY KEY,
+    travel_option_id INTEGER REFERENCES travel_options(id) ON DELETE CASCADE,
+    paragraph_en TEXT,
+    paragraph_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- ABOUT NITH: GOALS
+-- ==========================================
+CREATE TABLE IF NOT EXISTS goals (
+    id SERIAL PRIMARY KEY,
+    hero_heading_en VARCHAR(255),
+    hero_heading_hi VARCHAR(255),
+    hero_description_en TEXT,
+    hero_description_hi TEXT,
+    goals_heading_en VARCHAR(255),
+    goals_heading_hi VARCHAR(255),
+    goals_subtitle_en VARCHAR(255),
+    goals_subtitle_hi VARCHAR(255),
+    tagline_en VARCHAR(255),
+    tagline_hi VARCHAR(255),
+    tagline_description_en TEXT,
+    tagline_description_hi TEXT,
+    strategy_heading_en VARCHAR(255),
+    strategy_heading_hi VARCHAR(255),
+    strategy_subheading_en VARCHAR(255),
+    strategy_subheading_hi VARCHAR(255),
+    strategy_description_en TEXT,
+    strategy_description_hi TEXT,
+    cta_heading_en VARCHAR(255),
+    cta_heading_hi VARCHAR(255),
+    cta_description_en TEXT,
+    cta_description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS goal_items (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES goals(id) ON DELETE CASCADE,
+    title_en VARCHAR(255),
+    title_hi VARCHAR(255),
+    description_en TEXT,
+    description_hi TEXT,
+    link_text_en VARCHAR(255),
+    link_text_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS action_steps (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES goals(id) ON DELETE CASCADE,
+    step_number VARCHAR(255),
+    title_en VARCHAR(255),
+    title_hi VARCHAR(255),
+    description_en TEXT,
+    description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS cta_buttons (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES goals(id) ON DELETE CASCADE,
+    button_text_en VARCHAR(255),
+    button_text_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ==========================================
+-- ABOUT NITH: THE CITY
+-- ==========================================
+CREATE TABLE IF NOT EXISTS about_city (
+    id SERIAL PRIMARY KEY,
+    heading_en VARCHAR(255),
+    heading_hi VARCHAR(255),
+    introduction_en TEXT,
+    introduction_hi TEXT,
+    overview_title_en VARCHAR(255),
+    overview_title_hi VARCHAR(255),
+    overview_subtitle_en VARCHAR(255),
+    overview_subtitle_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_city_info_cards (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES about_city(id) ON DELETE CASCADE,
+    label_en VARCHAR(255),
+    label_hi VARCHAR(255),
+    value_en VARCHAR(255),
+    value_hi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_city_descriptions (
+    id SERIAL PRIMARY KEY,
+    reference_id INTEGER REFERENCES about_city(id) ON DELETE CASCADE,
+    description_en TEXT,
+    description_hi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- DYNAMIC ARRAYS FOR ABOUT NITH
+CREATE TABLE IF NOT EXISTS about_nith_timeline (
+  id SERIAL PRIMARY KEY,
+  year VARCHAR(50) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  description_en TEXT NOT NULL,
+  description_hi TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_nith_core_values (
+  id SERIAL PRIMARY KEY,
+  icon VARCHAR(100) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  description_en TEXT NOT NULL,
+  description_hi TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_nith_missions (
+  id SERIAL PRIMARY KEY,
+  icon VARCHAR(100) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  description_en TEXT NOT NULL,
+  description_hi TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_nith_connectivity_modes (
+  id SERIAL PRIMARY KEY,
+  icon VARCHAR(100) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  nearest_point_en VARCHAR(255) NOT NULL,
+  nearest_point_hi VARCHAR(255) NOT NULL,
+  distance_en VARCHAR(255) NOT NULL,
+  distance_hi VARCHAR(255) NOT NULL,
+  travel_time_en VARCHAR(255),
+  travel_time_hi VARCHAR(255),
+  services_en TEXT NOT NULL,
+  services_hi TEXT NOT NULL,
+  additional_info_en TEXT,
+  additional_info_hi TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_nith_goals (
+  id SERIAL PRIMARY KEY,
+  icon VARCHAR(100) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  text_en TEXT NOT NULL,
+  text_hi TEXT NOT NULL,
+  stats_label_en VARCHAR(255),
+  stats_label_hi VARCHAR(255),
+  stats_value VARCHAR(100),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_nith_roadmap (
+  id SERIAL PRIMARY KEY,
+  year VARCHAR(50) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  focus_en VARCHAR(255) NOT NULL,
+  focus_hi VARCHAR(255) NOT NULL,
+  items_en JSONB,
+  items_hi JSONB,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS about_nith_city_info (
+  id SERIAL PRIMARY KEY,
+  icon VARCHAR(100) NOT NULL,
+  title_en VARCHAR(255) NOT NULL,
+  title_hi VARCHAR(255) NOT NULL,
+  description_en TEXT NOT NULL,
+  description_hi TEXT NOT NULL,
+  image_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
