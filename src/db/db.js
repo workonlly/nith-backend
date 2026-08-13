@@ -8,16 +8,13 @@ const logFile = path.resolve(__dirname, '../../startup.log');
 
 
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: String(process.env.DB_PASSWORD),
-  database: process.env.DB_NAME,
-  port: Number(process.env.DB_PORT),
+  connectionString: process.env.DATABASE_URL,
 });
 
 pool.connect()
-  .then(() => {
+  .then((client) => {
     console.log('✅ PostgreSQL Connected Successfully');
+    client.release();
   })
   .catch((err) => {
     console.error('❌ PostgreSQL Connection Error:', err.message);

@@ -1,6 +1,12 @@
 const express = require('express');
-const pool = require('../db/db'); // Adjust path to your db connection
+const { sql } = require('../db/neon');
 const router = express.Router();
+
+/*
+// ==================================================
+// OLD CODE - COMMENTED OUT AS REQUESTED
+// ==================================================
+const pool = require('../db/db'); // Adjust path to your db connection
 
 // ==================================================
 // TABLE 1: aboutnith_history (Main Section)
@@ -202,6 +208,180 @@ router.delete('/timeline/:id', async (req, res) => {
     );
 
     if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Timeline event not found' });
+    }
+
+    res.json({ message: 'Timeline event deleted successfully' });
+  } catch (err) {
+    console.error('DELETE /history/timeline/:id error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+*/
+
+// ==================================================
+// NEW NEON IMPLEMENTATION (Bilingual Explicit Schema)
+// ==================================================
+
+// GET /history
+router.get('/', async (req, res) => {
+  try {
+    const records = await sql`SELECT * FROM aboutnith_history ORDER BY id ASC LIMIT 1`;
+    if (records.length === 0) {
+      return res.json({
+        description1: '', description1_hi: null,
+        description2: '', description2_hi: null,
+        legacy: '', legacy_hi: null 
+      });
+    }
+    res.json(records[0]);
+  } catch (err) {
+    console.error('GET /history error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /history
+router.put('/', async (req, res) => {
+  try {
+    const { lang = 'en', description1, description2, legacy } = req.body;
+
+    const check = await sql`SELECT id FROM aboutnith_history LIMIT 1`;
+
+    let result;
+    if (check.length === 0) {
+      if (lang === 'hi') {
+        result = await sql`
+          INSERT INTO aboutnith_history (description1_hi, description2_hi, legacy_hi) 
+          VALUES (${description1}, ${description2}, ${legacy}) RETURNING *
+        `;
+      } else {
+        result = await sql`
+          INSERT INTO aboutnith_history (description1_en, description2_en, legacy_en) 
+          VALUES (${description1}, ${description2}, ${legacy}) RETURNING *
+        `;
+      }
+    } else {
+      const id = check[0].id;
+      if (lang === 'hi') {
+        result = await sql`
+          UPDATE aboutnith_history 
+          SET description1_hi = ${description1}, description2_hi = ${description2}, legacy_hi = ${legacy}, updated_at = NOW()
+          WHERE id = ${id} RETURNING *
+        `;
+      } else {
+        result = await sql`
+          UPDATE aboutnith_history 
+          SET description1_en = ${description1}, description2_en = ${description2}, legacy_en = ${legacy}, updated_at = NOW()
+          WHERE id = ${id} RETURNING *
+        `;
+      }
+    }
+
+    res.json(result[0]);
+  } catch (err) {
+    console.error('PUT /history error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /history/timeline
+router.get('/timeline', async (req, res) => {
+  try {
+    const records = await sql`SELECT * FROM aboutnith_history_timeline ORDER BY year ASC, event_date ASC`;
+    res.json(records);
+  } catch (err) {
+    console.error('GET /history/timeline error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /history/timeline
+router.post('/timeline', async (req, res) => {
+  try {
+    const { lang = 'en', subtitle, year, title, event_date, description } = req.body;
+
+    let parentCheck = await sql`SELECT id FROM aboutnith_history LIMIT 1`;
+    let reference_id;
+    if (parentCheck.length === 0) {
+      const newParent = await sql`
+        INSERT INTO aboutnith_history (description1_en, description2_en, legacy_en) 
+        VALUES ('', '', '') RETURNING id
+      `;
+      reference_id = newParent[0].id;
+    } else {
+      reference_id = parentCheck[0].id;
+    }
+
+    let result;
+    if (lang === 'hi') {
+      result = await sql`
+        INSERT INTO aboutnith_history_timeline 
+        (reference_id, year, event_date, subtitle_hi, title_hi, description_hi) 
+        VALUES (${reference_id}, ${year}, ${event_date || null}, ${subtitle}, ${title}, ${description}) 
+        RETURNING *
+      `;
+    } else {
+      result = await sql`
+        INSERT INTO aboutnith_history_timeline 
+        (reference_id, year, event_date, subtitle_en, title_en, description_en) 
+        VALUES (${reference_id}, ${year}, ${event_date || null}, ${subtitle}, ${title}, ${description}) 
+        RETURNING *
+      `;
+    }
+
+    res.status(201).json(result[0]);
+  } catch (err) {
+    console.error('POST /history/timeline error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /history/timeline/:id
+router.put('/timeline/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { lang = 'en', year, event_date, subtitle, title, description } = req.body;
+
+    let result;
+    if (lang === 'hi') {
+      result = await sql`
+        UPDATE aboutnith_history_timeline 
+        SET year = ${year}, event_date = ${event_date || null}, subtitle_hi = ${subtitle}, title_hi = ${title}, description_hi = ${description}, updated_at = NOW()
+        WHERE id = ${id} 
+        RETURNING *
+      `;
+    } else {
+      result = await sql`
+        UPDATE aboutnith_history_timeline 
+        SET year = ${year}, event_date = ${event_date || null}, subtitle_en = ${subtitle}, title_en = ${title}, description_en = ${description}, updated_at = NOW()
+        WHERE id = ${id} 
+        RETURNING *
+      `;
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: 'Timeline event not found' });
+    }
+
+    res.json(result[0]);
+  } catch (err) {
+    console.error('PUT /history/timeline/:id error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// DELETE /history/timeline/:id
+router.delete('/timeline/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await sql`
+      DELETE FROM aboutnith_history_timeline WHERE id = ${id} RETURNING id
+    `;
+
+    if (result.length === 0) {
       return res.status(404).json({ error: 'Timeline event not found' });
     }
 

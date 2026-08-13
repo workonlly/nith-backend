@@ -148,8 +148,8 @@ CREATE TABLE director (
   institute_hi TEXT,
   message_en TEXT,
   message_hi TEXT,
-  "createdAt" TIMESTAMP DEFAULT NOW(),
-  "updatedAt" TIMESTAMP DEFAULT NOW()
+  createdAt TIMESTAMP DEFAULT NOW(),
+  updatedAt TIMESTAMP DEFAULT NOW()
 );
 
 -- =========================

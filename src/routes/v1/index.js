@@ -20,7 +20,7 @@ router.use('/authorities', require('../authorities'));
 router.use('/departments', require('../departments'));
 
 // Downloads routes
-router.use('/downloads', require('../downloads'));
+router.use('/downloads', require('../../download/download'));
 
 //Homepage routes
 router.use('/homepage/gallery', require('../../homepage/gallery'));
@@ -39,6 +39,5 @@ router.use('/homepage', require('../../homepage/admission'));
 router.use('/homepage', require('../../homepage/placements'));
 router.use('/homepage', require('../../homepage/achievements'));
 router.use('/homepage', require('../../homepage/director'));
-router.use('/homepage', require('../../homepage/gallery'));
 
 module.exports = router;
