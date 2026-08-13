@@ -59,11 +59,14 @@ const bogRoutes      = require('./src/authorities/blog');           // BOG
 const bwcRoutes      = require('./src/authorities/building');       // BWC
 const senateRoutes   = require('./src/authorities/senate');         // Senate
 const fcRoutes       = require('./src/authorities/finance_commitee'); // Finance Committee
+const anchorLinksRoutes = require('./src/authorities/anchor_links');
 
 // Middleware
 
+const path = require('path');
 app.use(cors());               // Enable CORS for all routes
 app.use(express.json());       // Parse JSON bodies
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads'))); // Serve local uploads
 app.use('/api/v1', v1Routes);
 app.use('/v1', v1Routes);
 app.use('/auth',authroute);
@@ -131,6 +134,7 @@ app.use('/bog',    bogRoutes);
 app.use('/bwc',    bwcRoutes);
 app.use('/senate', senateRoutes);
 app.use('/fc',     fcRoutes);
+app.use('/anchor-links', anchorLinksRoutes);
 
 // ── File upload route ──────────────────────────────────────────────────────
 app.post('/api/upload', (req, res) => {
@@ -152,9 +156,18 @@ app.get('/', (req, res) => {
   res.send('NIT Hamirpur Backend API is running!');
 });
 
+// Global error handler (catches Multer S3 ECONNREFUSED and other unhandled errors)
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({
+    success: false,
+    error: err.message || 'Internal Server Error',
+    code: err.code || 'UNKNOWN_ERROR'
+  });
+});
+
 // Start server
 const fs = require('fs');
-const path = require('path');
 app.listen(PORT, '0.0.0.0', () => {
   const msg = `Server started at ${new Date().toISOString()} on port ${PORT}. process.env.PORT is ${process.env.PORT}\n`;
   console.log(msg);

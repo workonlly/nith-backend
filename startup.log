@@ -75,3 +75,99 @@ Server started at 2026-08-13T20:18:55.029Z on port 4000. process.env.PORT is 400
 [DB Query] SUCCESS: SELECT * FROM about_nith_timeline ORDER BY id ASC... | Duration: 3495ms
 [DB Query] SUCCESS: SELECT * FROM about_nith_core_values ORDER BY id ASC... | Duration: 440ms
 [DB Query] SUCCESS: SELECT * FROM about_nith_core_values ORDER BY id ASC... | Duration: 445ms
+Server started at 2026-08-13T20:37:45.749Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:38:12.578Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:38:20.663Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:38:28.540Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: INSERT INTO anchor_links (id, link_text, link_url) VALUES ($1, $2, $3) RETURNING *... | Duration: 3465ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3607ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3607ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 305ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 316ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3862ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3678ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3678ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3325ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3507ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3546ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 292ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 295ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 293ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 281ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 295ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3406ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3344ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 318ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 287ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3374ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 291ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 307ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 308ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3552ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3718ms
+Server started at 2026-08-13T21:05:41.251Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T21:12:37.825Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T21:12:46.604Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3514ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 286ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 493ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 306ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 292ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 290ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3874ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3875ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3939ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 318ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3864ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3930ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4834ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 383ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 384ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 1109ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 1111ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4077ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4079ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 8879ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3611ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3685ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_missions ORDER BY id ASC... | Duration: 3959ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_missions ORDER BY id ASC... | Duration: 3907ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 322ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 324ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 5444ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 300ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 303ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3626ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3559ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 314ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3676ms
+[DB Query] SUCCESS: SELECT * FROM senate_members ORDER BY created_at ASC... | Duration: 4065ms
+[DB Query] SUCCESS: SELECT * FROM senate_members ORDER BY created_at ASC... | Duration: 370ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 4947ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 305ms
+[DB Query] SUCCESS: SELECT * FROM senate_members ORDER BY created_at ASC... | Duration: 5312ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 5349ms
+Server started at 2026-08-13T21:41:19.571Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 11153ms
+Server started at 2026-08-13T21:45:36.694Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T21:48:09.143Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: INSERT INTO senate_minutes (title, meeting_date, document_url, uploaded_by)
+      VALUES ($1, $2, $3... | Duration: 4113ms
+[DB Query] SUCCESS: SELECT * FROM fc_minutes ORDER BY meeting_date DESC... | Duration: 3564ms
+[DB Query] SUCCESS: SELECT * FROM fc_minutes ORDER BY meeting_date DESC... | Duration: 311ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 357ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 307ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 305ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 299ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 318ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3563ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 290ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 299ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3460ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 5086ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4288ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4290ms

@@ -2596,3 +2596,14 @@ CREATE TABLE IF NOT EXISTS about_nith_city_info (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- =====================================================================
+-- only anachor function link here
+
+CREATE TABLE IF NOT EXISTS anchor_links(
+  id VARCHAR(255) PRIMARY KEY,
+  link_text VARCHAR(255) NOT NULL,
+  link_url TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
