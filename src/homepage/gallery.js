@@ -1,404 +1,108 @@
 const express = require('express');
+const router = express.Router();
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
+const path = require('path');
+const { sql, s3Client } = require('../db/neon');
 
-const pool = require('../db/db');
-const s3Client = require('../db/minio');
-
-
-const router = express.Router();
-
+// ======================================================
+// MULTER CONFIG (Neon S3 Upload)
+// ======================================================
 const upload = multer({
   storage: multerS3({
     s3: s3Client,
-    bucket: 'gallery',
-
-    contentType:
-      multerS3.AUTO_CONTENT_TYPE,
-
+    bucket: 'nit',
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     metadata: (req, file, cb) => {
-      cb(null, {
-        fieldName: file.fieldname,
-      });
+      cb(null, { fieldName: file.fieldname });
     },
-
     key: (req, file, cb) => {
-      cb(
-        null,
-        `uploads/${Date.now()}-${file.originalname}`
-      );
+      const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9) + path.extname(file.originalname);
+      cb(null, `gallery/${uniqueName}`);
     },
   }),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit for gallery images
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error('Only JPG, PNG and WEBP images are allowed'));
+    }
+    cb(null, true);
+  },
 });
 
-
-
-router.post(
-  '/upload',
-  upload.single('file'),
-  async (req, res) => {
-    try {
-
-      if (!req.file) {
-        return res.status(400).json({
-          error: 'No file uploaded',
-        });
-      }
-
-      res.json({
-        success: true,
-        url: req.file.location,
-      });
-
-    } catch (err) {
-
-      res.status(500).json({
-        error: err.message,
-      });
-    }
-  }
-);
-
-const getFileKey = (fileUrl) => {
-  if (!fileUrl) return null;
-
+// ======================================================
+// GET GALLERY IMAGES
+// ======================================================
+router.get('/', async (req, res) => {
   try {
-
-    const url = new URL(fileUrl);
-
-    return decodeURIComponent(
-      url.pathname.replace(
-        /^\/gallery\//,
-        ''
-      )
-    );
-
-  } catch {
-    return null;
+    const result = await sql`SELECT * FROM gallery ORDER BY id DESC`;
+    res.json({ success: true, data: result });
+  } catch (err) {
+    console.error('GET /gallery error:', err);
+    res.status(500).json({ success: false, error: err.message });
   }
-};
+});
 
-const deleteFromMinio =
-  async (fileUrl) => {
-
-    const key =
-      getFileKey(fileUrl);
-
-    if (!key) return;
-
-    try {
-
-      await s3Client.send(
-        new DeleteObjectCommand({
-          Bucket: 'gallery',
-          Key: key,
-        })
-      );
-
-    } catch (err) {
-
-      console.error(
-        'MinIO delete error:',
-        err.message
-      );
+// ======================================================
+// UPLOAD GALLERY IMAGE
+// ======================================================
+router.post('/upload', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ success: false, error: 'No image uploaded' });
     }
-  };
 
+    const imageName = req.file.key;
+    const imageUrl = `${process.env.AWS_ENDPOINT_URL_S3}/nit/${imageName}`;
+    const id = Date.now().toString();
 
-  //gallery crud operations
-  
-  router.get(
-  '/',
-  async (req, res) => {
-
-    try {
-
-      const section =
-        await pool.query(`
-          SELECT *
-          FROM gallery_section
-          LIMIT 1
-        `);
-
-      const images =
-        await pool.query(`
-          SELECT *
-          FROM gallery_images
-          ORDER BY id ASC
-        `);
-
-        res.json({
-          heading_en:
-            section.rows[0]
-              ?.heading_en || '',
-
-          heading_hi:
-            section.rows[0]
-              ?.heading_hi || '',
-
-          description_en:
-            section.rows[0]
-              ?.description_en || '',
-
-          description_hi:
-            section.rows[0]
-              ?.description_hi || '',
-
-          images: images.rows.map(
-            (img) => ({
-              title_en:
-                img.title_en,
-
-              title_hi:
-                img.title_hi,
-
-              category_en:
-                img.category_en,
-
-              category_hi:
-                img.category_hi,
-
-              altText_en:
-                img.alt_text_en,
-
-              altText_hi:
-                img.alt_text_hi,
-
-              imageUrl:
-                img.image_url,
-            })
-          ),
-      });
-
-    } catch (err) {
-
-      res.status(500).json({
-        error: err.message,
-      });
-    }
+    const result = await sql`
+      INSERT INTO gallery (id, imageurl)
+      VALUES (${id}, ${imageUrl})
+      RETURNING *
+    `;
+    
+    res.status(201).json({ success: true, data: result[0] });
+  } catch (err) {
+    console.error('POST /gallery/upload error:', err);
+    res.status(500).json({ success: false, error: err.message });
   }
-);
+});
 
-
-
-router.put(
-  '/',
-  async (req, res) => {
-    try {
-      const {
-        heading_en,
-        heading_hi,
-        description_en,
-        description_hi,
-        images,
-      } = req.body;
-
-
-      const section = await pool.query(`
-        SELECT *
-        FROM gallery_section
-        LIMIT 1
-      `);
-
-      if (section.rows.length) {
-        await pool.query(
-          `
-          UPDATE gallery_section
-          SET
-            heading_en = $1,
-            heading_hi = $2,
-            description_en = $3,
-            description_hi = $4,
-            updated_at = NOW()
-          `,
-          [
-            heading_en,
-            heading_hi,
-            description_en,
-            description_hi,
-          ]
-        );
-      } else {
-        await pool.query(
-          `
-          INSERT INTO gallery_section
-          (
-            heading_en,
-            heading_hi,
-            description_en,
-            description_hi
-          )
-          VALUES
-          ($1,$2,$3,$4)
-          `,
-          [
-            heading_en,
-            heading_hi,
-            description_en,
-            description_hi,
-          ]
-        );
-      }
-
-
-      const oldImages = await pool.query(`
-        SELECT image_url
-        FROM gallery_images
-      `);
-
- 
-      await pool.query(`
-        DELETE FROM gallery_images
-      `);
-
-
-      for (const image of images || []) {
-        await pool.query(
-          `
-          INSERT INTO gallery_images
-          (
-            title_en,
-            title_hi,
-
-            category_en,
-            category_hi,
-
-            alt_text_en,
-            alt_text_hi,
-
-            image_url,
-
-            created_at,
-            updated_at
-          )
-          VALUES
-          (
-            $1,$2,
-            $3,$4,
-            $5,$6,
-            $7,
-            NOW(),
-            NOW()
-          )
-          `,
-          [
-            image.title_en,
-            image.title_hi,
-
-            image.category_en,
-            image.category_hi,
-
-            image.altText_en,
-            image.altText_hi,
-
-            image.imageUrl,
-          ]
-        );
-      }
-
-       const newUrls = (images || []).map(
-       (img) => img.imageUrl
-        );
-
-      for (const old of oldImages.rows) {
-        if (
-          old.image_url &&
-          !newUrls.includes(old.image_url)
-        ) {
-          await deleteFromMinio(
-            old.image_url
-          );
-        }
-      }
-
-      res.json({
-        success: true,
-      });
-
-    } catch (err) {
-      console.error(err);
-
-      res.status(500).json({
-        success: false,
-        error: err.message,
-      });
+// ======================================================
+// DELETE GALLERY IMAGE
+// ======================================================
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const record = await sql`SELECT imageurl FROM gallery WHERE id = ${id}`;
+    if (record.length === 0) {
+      return res.status(404).json({ success: false, error: 'Image not found in database' });
     }
-  }
-);
-
-
-router.delete(
-  '/image/:id',
-  async (req, res) => {
-
-    try {
-
-      const result =
-        await pool.query(
-          `
-          SELECT *
-          FROM gallery_images
-          WHERE id=$1
-        `,
-          [req.params.id]
-        );
-
-      if (
-        !result.rows.length
-      ) {
-        return res
-          .status(404)
-          .json({
-            error:
-              'Image not found',
-          });
-      }
-
-      await deleteFromMinio(
-        result.rows[0]
-          .image_url
-      );
-
-      await pool.query(
-        `
-        DELETE
-        FROM gallery_images
-        WHERE id=$1
-      `,
-        [req.params.id]
-      );
-
-      res.json({
-        success: true,
+    
+    const imageUrl = record[0].imageurl;
+    // Extract key. URL format: .../nit/gallery/filename.ext
+    const urlParts = imageUrl.split('/nit/');
+    if (urlParts.length > 1) {
+      const fileKey = urlParts[1];
+      const deleteCommand = new DeleteObjectCommand({
+        Bucket: 'nit',
+        Key: fileKey,
       });
-
-    } catch (err) {
-
-      res.status(500).json({
-        error: err.message,
-      });
+      await s3Client.send(deleteCommand);
+      console.log('S3 image deleted successfully');
     }
-  }
-);
 
+    await sql`DELETE FROM gallery WHERE id = ${id}`;
+    
+    res.json({ success: true, message: 'Gallery image deleted successfully' });
+  } catch (err) {
+    console.error('DELETE /gallery/:id error:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

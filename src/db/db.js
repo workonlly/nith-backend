@@ -5,13 +5,20 @@ const path = require('path');
 
 const logFile = path.resolve(__dirname, '../../startup.log');
 
+
+
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  connectionString: process.env.DATABASE_URL,
 });
+
+pool.connect()
+  .then((client) => {
+    console.log('✅ PostgreSQL Connected Successfully');
+    client.release();
+  })
+  .catch((err) => {
+    console.error('❌ PostgreSQL Connection Error:', err.message);
+  });
 
 pool.on('error', (err) => {
   const msg = `[DB Error] Unexpected pool error: ${err.message}\n`;

@@ -1,31 +1,15 @@
 const express = require('express');
-const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
+
 const pool = require('../db/db');
-const s3Client = require('../db/minio');
+
 
 // Import your custom middleware and bucket name constant
-const { uploadAuthorities, AUTHORITY_BUCKET } = require('../middleware/upload'); 
+const { uploadAuthorities, deleteLocalFile } = require('../middleware/upload'); 
 
 const router = express.Router();
 const uploadFile = uploadAuthorities.single('file');
 
 // Helper to clean up overwritten or deleted files from MinIO bucket
-const deleteMinioFile = async (fileUrl) => {
-  if (!fileUrl) return;
-  try {
-    const urlParts = fileUrl.split(`/${AUTHORITY_BUCKET}/`);
-    if (urlParts.length < 2) return;
-    const fileKey = decodeURIComponent(urlParts[1]);
-
-    await s3Client.send(new DeleteObjectCommand({
-      Bucket: AUTHORITY_BUCKET,
-      Key: fileKey,
-    }));
-    console.log(`[MinIO] Cleaned storage space. Deleted key: ${fileKey}`);
-  } catch (err) {
-    console.error(`[MinIO] Failed to prune storage item (${fileUrl}):`, err);
-  }
-};
 
 /* ==========================================================================
    BOG MEMBERS ENDPOINTS
@@ -135,7 +119,7 @@ router.put('/minutes/:id', uploadFile, async (req, res) => {
     let currentUrl = oldRecord.rows[0].document_url;
 
     if (req.file) {
-      await deleteMinioFile(currentUrl);
+      await deleteLocalFile(currentUrl);
       currentUrl = req.file.location;
     }
 
@@ -163,7 +147,7 @@ router.delete('/minutes/:id', async (req, res) => {
 
     const fileUrl = record.rows[0].document_url;
     if (fileUrl) {
-      await deleteMinioFile(fileUrl);
+      await deleteLocalFile(fileUrl);
     }
 
     await pool.query('DELETE FROM bog_minutes WHERE id = $1', [id]);

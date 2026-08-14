@@ -1,473 +1,182 @@
-Server started at 2026-05-18T10:10:20.878Z on port 5000. process.env.PORT is 5000
-Server started at 2026-05-18T10:10:37.046Z on port 5000. process.env.PORT is 5000
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance_downloads ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance_downloads ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance_downloads ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_vigilance_downloads ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_vigilance (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_vigilance (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_vigilance (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_vigilance (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_vigilance (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM chairperson ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_chairperson_former ORDER BY id DESC
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM chairperson ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_chairperson_former ORDER BY id DESC
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO chairperson (id, title, name, description, dates, image)
-      VALUES ($1, $2, $3, $4, $5, $6)
-      ON CONFLICT (id) DO UPDATE SET
-        title = EXCLUDED.title,
-        name = EXCLUDED.name,
-        description = EXCLUDED.description,
-        dates = EXCLUDED.dates,
-        image = EXCLUDED.image
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_institute_coordinators_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_institute_coordinators ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_institute_coordinators_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_institute_coordinators ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_institute_coordinators_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_institute_coordinators (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_institute_coordinators (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_institute_coordinators (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: INSERT INTO administration_institute_coordinators (name, responsibility, phone, email) VALUES ($1, $2, $3, $4) RETURNING *
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_dean ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_dean ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_director LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_former_directors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_director LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_director_office ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_director_office ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_former_directors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_director (id, hero_heading, hero_subheading, current_name, current_designation, message_heading, message_paragraphs, message_closing, message_signature_title, message_signature_org, message_signature_location)
-      VALUES (1, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading,
-        current_name = EXCLUDED.current_name,
-        current_designation = EXCLUDED.current_designation,
-        message_heading = EXCLUDED.message_heading,
-        message_paragraphs = EXCLUDED.message_paragraphs,
-        message_closing = EXCLUDED.message_closing,
-        message_signature_title = EXCLUDED.message_signature_title,
-        message_signature_org = EXCLUDED.message_signature_org,
-        message_signature_location = EXCLUDED.message_signature_location
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_director (id, hero_heading, hero_subheading, current_name, current_designation, message_heading, message_paragraphs, message_closing, message_signature_title, message_signature_org, message_signature_location)
-      VALUES (1, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading,
-        current_name = EXCLUDED.current_name,
-        current_designation = EXCLUDED.current_designation,
-        message_heading = EXCLUDED.message_heading,
-        message_paragraphs = EXCLUDED.message_paragraphs,
-        message_closing = EXCLUDED.message_closing,
-        message_signature_title = EXCLUDED.message_signature_title,
-        message_signature_org = EXCLUDED.message_signature_org,
-        message_signature_location = EXCLUDED.message_signature_location
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_director (id, hero_heading, hero_subheading, current_name, current_designation, message_heading, message_paragraphs, message_closing, message_signature_title, message_signature_org, message_signature_location)
-      VALUES (1, $1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading,
-        current_name = EXCLUDED.current_name,
-        current_designation = EXCLUDED.current_designation,
-        message_heading = EXCLUDED.message_heading,
-        message_paragraphs = EXCLUDED.message_paragraphs,
-        message_closing = EXCLUDED.message_closing,
-        message_signature_title = EXCLUDED.message_signature_title,
-        message_signature_org = EXCLUDED.message_signature_org,
-        message_signature_location = EXCLUDED.message_signature_location
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar_office ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar_office ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_registrar (id, name, image, email, phone, profile_summary_en, profile_summary_hi)
-      VALUES (1, $1, $2, $3, $4, $5, $6)
-      ON CONFLICT (id) DO UPDATE SET
-        name = EXCLUDED.name,
-        image = EXCLUDED.image,
-        email = EXCLUDED.email,
-        phone = EXCLUDED.phone,
-        profile_summary_en = EXCLUDED.profile_summary_en,
-        profile_summary_hi = EXCLUDED.profile_summary_hi
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar_office ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar_office ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_registrar LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academics WHERE page_name = $1 ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academics WHERE page_name = $1 ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academics WHERE page_name = $1 ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academics WHERE page_name = $1 ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academic_tables ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academic_tables ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academic_notices ORDER BY date DESC, id DESC
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM academic_notices ORDER BY date DESC, id DESC
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors_info LIMIT 1
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: SELECT * FROM administration_visitors ORDER BY id
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading
-      RETURNING *
-    
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: 
-      INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2)
-      ON CONFLICT (id) DO UPDATE SET
-        hero_heading = EXCLUDED.hero_heading,
-        hero_subheading = EXCLUDED.hero_subheading
-      RETURNING *
-    
-[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 101ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 99ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 133ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 9ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 3ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 32ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2... | Duration: 35ms
-[DB Query] SUCCESS: INSERT INTO administration_visitors_info (id, hero_heading, hero_subheading)
-      VALUES (1, $1, $2... | Duration: 13ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors_info LIMIT 1... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM administration_visitors ORDER BY id... | Duration: 21ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 220ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 9ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 7ms
-[DB Query] SUCCESS: SELECT * FROM academic_tables ORDER BY id... | Duration: 9ms
-[DB Query] SUCCESS: SELECT * FROM academic_tables ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 4ms
-Server started at 2026-05-18T10:25:08.822Z on port 5000. process.env.PORT is 5000
-Server started at 2026-05-18T10:27:57.040Z on port 5000. process.env.PORT is 5000
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 61ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = $1... | Duration: 4ms
-[DB Query] ERROR: column "hero_image" of relation "academics" does not exist on query: UPDATE academics SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_image = $6, content = $7 WHERE page_name = $1 RETURNING *
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = $1... | Duration: 26ms
-[DB Query] ERROR: column "hero_image" of relation "academics" does not exist on query: UPDATE academics SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_image = $6, content = $7 WHERE page_name = $1 RETURNING *
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = $1... | Duration: 26ms
-[DB Query] ERROR: column "hero_image" of relation "academics" does not exist on query: UPDATE academics SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_image = $6, content = $7 WHERE page_name = $1 RETURNING *
-Server started at 2026-05-18T10:28:54.048Z on port 5000. process.env.PORT is 5000
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_visitors_info (id SERIAL PRIMARY KEY, hero_heading TEXT, h... | Duration: 46ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_visitors (id SERIAL PRIMARY KEY, name TEXT NOT NULL, title... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_institute_coordinators (id SERIAL PRIMARY KEY, name TEXT N... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_institute_coordinators_info (id INTEGER PRIMARY KEY, hero_... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_nodal_officers (id SERIAL PRIMARY KEY, name TEXT NOT NULL,... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_director (id INTEGER PRIMARY KEY, hero_heading TEXT, hero_... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_former_directors (id SERIAL PRIMARY KEY, name TEXT NOT NUL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_director_office (id SERIAL PRIMARY KEY, name TEXT NOT NULL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_faculty_incharges (id SERIAL PRIMARY KEY, name TEXT NOT NU... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_hod (id SERIAL PRIMARY KEY, name TEXT NOT NULL, designatio... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_registrar (id INTEGER PRIMARY KEY, name TEXT, image TEXT, ... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_registrar_office (id SERIAL PRIMARY KEY, name TEXT NOT NUL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_vigilance (id SERIAL PRIMARY KEY, name TEXT NOT NULL, resp... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_vigilance_downloads (id SERIAL PRIMARY KEY, title TEXT NOT... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS chairperson (id SERIAL PRIMARY KEY, title TEXT, name TEXT, description TE... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_chairperson_former (id SERIAL PRIMARY KEY, name TEXT NOT N... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_dean (id SERIAL PRIMARY KEY, name TEXT NOT NULL, title TEX... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_notices (id SERIAL PRIMARY KEY, title TEXT NOT NULL, description... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_calendars (id SERIAL PRIMARY KEY, title TEXT NOT NULL, descripti... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_tables (id SERIAL PRIMARY KEY, table_name TEXT NOT NULL, name TE... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academics (id SERIAL PRIMARY KEY, page_name TEXT UNIQUE, title_en TEXT, t... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academics_links (id SERIAL PRIMARY KEY, category TEXT NOT NULL, title TEX... | Duration: 0ms
-[DB Query] SUCCESS: ALTER TABLE administration_dean ADD COLUMN IF NOT EXISTS category VARCHAR(50)... | Duration: 13ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS profile_summary_en TEXT[]... | Duration: 13ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS profile_summary_hi TEXT[]... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS image TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar_office ADD COLUMN IF NOT EXISTS is_registrar BOOLEAN... | Duration: 3ms
-[DB Query] ERROR: column "file_path" of relation "administration_vigilance_downloads" already exists on query: ALTER TABLE administration_vigilance_downloads RENAME COLUMN url TO file_path
-[DB Query] SUCCESS: ALTER TABLE administration_vigilance_downloads ADD COLUMN IF NOT EXISTS file_path TEXT... | Duration: 12ms
-[DB Query] SUCCESS: ALTER TABLE administration_vigilance_downloads ALTER COLUMN url DROP NOT NULL... | Duration: 2ms
-[DB Query] ERROR: relation "administration_vigilance" already exists on query: ALTER TABLE administration_viligence_officer RENAME TO administration_vigilance
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS hero_heading TEXT... | Duration: 11ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS hero_subheading TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS current_name TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS current_designation TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_heading TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_paragraphs TEXT[]... | Duration: 0ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_closing TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_title TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_org TEXT... | Duration: 0ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_location TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS page_name TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_en TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_hi TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_en TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_hi TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS hero_image TEXT... | Duration: 6ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS content JSONB... | Duration: 2ms
-[DB Query] ERROR: relation "academics_page_name_unique" already exists on query: ALTER TABLE academics ADD CONSTRAINT academics_page_name_unique UNIQUE (page_name)
-[DB Query] SUCCESS: SELECT id FROM chairperson LIMIT 1... | Duration: 10ms
-[DB Query] SUCCESS: SELECT id FROM administration_registrar LIMIT 1... | Duration: 4ms
-[DB Query] SUCCESS: SELECT id FROM administration_dean LIMIT 1... | Duration: 2ms
-[DB Query] SUCCESS: SELECT id FROM administration_vigilance_downloads LIMIT 1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM academic_tables WHERE table_name = 'functionaries' LIMIT 1... | Duration: 3ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = 'activities' LIMIT 1... | Duration: 1ms
-Server started at 2026-05-18T10:29:41.775Z on port 5000. process.env.PORT is 5000
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 22ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = $1... | Duration: 2ms
-[DB Query] SUCCESS: UPDATE academics SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_im... | Duration: 12ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = $1... | Duration: 3ms
-[DB Query] SUCCESS: UPDATE academics SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_im... | Duration: 6ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM academics WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM academic_tables ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM academic_tables ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = $1... | Duration: 1ms
-[DB Query] SUCCESS: INSERT INTO academics (page_name, title_en, title_hi, description_en, description_hi, hero_image, co... | Duration: 13ms
-[DB Query] SUCCESS: SELECT * FROM academic_notices ORDER BY date DESC, id DESC... | Duration: 5ms
-[DB Query] SUCCESS: SELECT * FROM academic_notices ORDER BY date DESC, id DESC... | Duration: 0ms
-[DB Query] ERROR: connect ECONNREFUSED 127.0.0.1:5432 on query: CREATE TABLE IF NOT EXISTS administration_visitors_info (id SERIAL PRIMARY KEY, hero_heading TEXT, hero_subheading TEXT)
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_visitors_info (id SERIAL PRIMARY KEY, hero_heading TEXT, h... | Duration: 40ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_visitors (id SERIAL PRIMARY KEY, name TEXT NOT NULL, title... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_institute_coordinators (id SERIAL PRIMARY KEY, name TEXT N... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_institute_coordinators_info (id INTEGER PRIMARY KEY, hero_... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_nodal_officers (id SERIAL PRIMARY KEY, name TEXT NOT NULL,... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_director (id INTEGER PRIMARY KEY, hero_heading TEXT, hero_... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_former_directors (id SERIAL PRIMARY KEY, name TEXT NOT NUL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_director_office (id SERIAL PRIMARY KEY, name TEXT NOT NULL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_faculty_incharges (id SERIAL PRIMARY KEY, name TEXT NOT NU... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_hod (id SERIAL PRIMARY KEY, name TEXT NOT NULL, designatio... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_registrar (id INTEGER PRIMARY KEY, name TEXT, image TEXT, ... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_registrar_office (id SERIAL PRIMARY KEY, name TEXT NOT NUL... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_vigilance (id SERIAL PRIMARY KEY, name TEXT NOT NULL, resp... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_vigilance_downloads (id SERIAL PRIMARY KEY, title TEXT NOT... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS chairperson (id SERIAL PRIMARY KEY, title TEXT, name TEXT, description TE... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_chairperson_former (id SERIAL PRIMARY KEY, name TEXT NOT N... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_dean (id SERIAL PRIMARY KEY, name TEXT NOT NULL, title TEX... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_notices (id SERIAL PRIMARY KEY, title TEXT NOT NULL, description... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_calendars (id SERIAL PRIMARY KEY, title TEXT NOT NULL, descripti... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_tables (id SERIAL PRIMARY KEY, table_name TEXT NOT NULL, name TE... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academics (id SERIAL PRIMARY KEY, page_name TEXT UNIQUE, title_en TEXT, t... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academics_links (id SERIAL PRIMARY KEY, category TEXT NOT NULL, title TEX... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS students (id SERIAL PRIMARY KEY, page_name TEXT UNIQUE, title_en TEXT, ti... | Duration: 23ms
-[DB Query] SUCCESS: ALTER TABLE administration_dean ADD COLUMN IF NOT EXISTS category VARCHAR(50)... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS profile_summary_en TEXT[]... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS profile_summary_hi TEXT[]... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS image TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar_office ADD COLUMN IF NOT EXISTS is_registrar BOOLEAN... | Duration: 1ms
-[DB Query] ERROR: column "file_path" of relation "administration_vigilance_downloads" already exists on query: ALTER TABLE administration_vigilance_downloads RENAME COLUMN url TO file_path
-[DB Query] SUCCESS: ALTER TABLE administration_vigilance_downloads ADD COLUMN IF NOT EXISTS file_path TEXT... | Duration: 5ms
-[DB Query] SUCCESS: ALTER TABLE administration_vigilance_downloads ALTER COLUMN url DROP NOT NULL... | Duration: 1ms
-[DB Query] ERROR: relation "administration_vigilance" already exists on query: ALTER TABLE administration_viligence_officer RENAME TO administration_vigilance
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS hero_heading TEXT... | Duration: 6ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS hero_subheading TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS current_name TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS current_designation TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_heading TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_paragraphs TEXT[]... | Duration: 0ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_closing TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_title TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_org TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_location TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS page_name TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_en TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_hi TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_en TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_hi TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS hero_image TEXT... | Duration: 0ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS content JSONB... | Duration: 1ms
-[DB Query] ERROR: relation "academics_page_name_unique" already exists on query: ALTER TABLE academics ADD CONSTRAINT academics_page_name_unique UNIQUE (page_name)
-[DB Query] SUCCESS: SELECT id FROM chairperson LIMIT 1... | Duration: 6ms
-[DB Query] SUCCESS: SELECT id FROM administration_registrar LIMIT 1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM administration_dean LIMIT 1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM administration_vigilance_downloads LIMIT 1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM academic_tables WHERE table_name = 'functionaries' LIMIT 1... | Duration: 4ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = 'activities' LIMIT 1... | Duration: 2ms
-[DB Query] SUCCESS: SELECT id FROM students LIMIT 1... | Duration: 0ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 2ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 1ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 1ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 1ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 2ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 1ms
-Server started at 2026-05-29T08:43:27.338Z on port 5000. process.env.PORT is 5000
-Server started at 2026-05-29T08:48:46.939Z on port 5000. process.env.PORT is 5000
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 226ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 3ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 15ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 13ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 4ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 17ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 6ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 3ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 96ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 4ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 190ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 30ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 20ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 1ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 6ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 102ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 43ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 35ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 7ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 5ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 2ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 8ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 1ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 4ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 25ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 111ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 19ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 4ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 14ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 2ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 53ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 10ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 3ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 388ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 4ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 156ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 18ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 55ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 11ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 4ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 27ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 11ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 4ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_visitors_info (id SERIAL PRIMARY KEY, hero_heading TEXT, h... | Duration: 111ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_visitors (id SERIAL PRIMARY KEY, name TEXT NOT NULL, title... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_institute_coordinators (id SERIAL PRIMARY KEY, name TEXT N... | Duration: 2ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_institute_coordinators_info (id INTEGER PRIMARY KEY, hero_... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_nodal_officers (id SERIAL PRIMARY KEY, name TEXT NOT NULL,... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_director (id INTEGER PRIMARY KEY, hero_heading TEXT, hero_... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_former_directors (id SERIAL PRIMARY KEY, name TEXT NOT NUL... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_director_office (id SERIAL PRIMARY KEY, name TEXT NOT NULL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_faculty_incharges (id SERIAL PRIMARY KEY, name TEXT NOT NU... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_hod (id SERIAL PRIMARY KEY, name TEXT NOT NULL, designatio... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_registrar (id INTEGER PRIMARY KEY, name TEXT, image TEXT, ... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_registrar_office (id SERIAL PRIMARY KEY, name TEXT NOT NUL... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_vigilance (id SERIAL PRIMARY KEY, name TEXT NOT NULL, resp... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_vigilance_downloads (id SERIAL PRIMARY KEY, title TEXT NOT... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS chairperson (id SERIAL PRIMARY KEY, title TEXT, name TEXT, description TE... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_chairperson_former (id SERIAL PRIMARY KEY, name TEXT NOT N... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS administration_dean (id SERIAL PRIMARY KEY, name TEXT NOT NULL, title TEX... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_notices (id SERIAL PRIMARY KEY, title TEXT NOT NULL, description... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_calendars (id SERIAL PRIMARY KEY, title TEXT NOT NULL, descripti... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academic_tables (id SERIAL PRIMARY KEY, table_name TEXT NOT NULL, name TE... | Duration: 0ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academics (id SERIAL PRIMARY KEY, page_name TEXT UNIQUE, title_en TEXT, t... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS academics_links (id SERIAL PRIMARY KEY, category TEXT NOT NULL, title TEX... | Duration: 1ms
-[DB Query] SUCCESS: CREATE TABLE IF NOT EXISTS students (id SERIAL PRIMARY KEY, page_name TEXT UNIQUE, title_en TEXT, ti... | Duration: 0ms
-[DB Query] SUCCESS: ALTER TABLE administration_dean ADD COLUMN IF NOT EXISTS category VARCHAR(50)... | Duration: 23ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS profile_summary_en TEXT[]... | Duration: 5ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS profile_summary_hi TEXT[]... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar ADD COLUMN IF NOT EXISTS image TEXT... | Duration: 6ms
-[DB Query] SUCCESS: ALTER TABLE administration_registrar_office ADD COLUMN IF NOT EXISTS is_registrar BOOLEAN... | Duration: 5ms
-[DB Query] ERROR: column "file_path" of relation "administration_vigilance_downloads" already exists on query: ALTER TABLE administration_vigilance_downloads RENAME COLUMN url TO file_path
-[DB Query] SUCCESS: ALTER TABLE administration_vigilance_downloads ADD COLUMN IF NOT EXISTS file_path TEXT... | Duration: 19ms
-[DB Query] SUCCESS: ALTER TABLE administration_vigilance_downloads ALTER COLUMN url DROP NOT NULL... | Duration: 6ms
-[DB Query] ERROR: relation "administration_vigilance" already exists on query: ALTER TABLE administration_viligence_officer RENAME TO administration_vigilance
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS hero_heading TEXT... | Duration: 14ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS hero_subheading TEXT... | Duration: 3ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS current_name TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS current_designation TEXT... | Duration: 3ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_heading TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_paragraphs TEXT[]... | Duration: 4ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_closing TEXT... | Duration: 4ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_title TEXT... | Duration: 5ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_org TEXT... | Duration: 4ms
-[DB Query] SUCCESS: ALTER TABLE administration_director ADD COLUMN IF NOT EXISTS message_signature_location TEXT... | Duration: 3ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS page_name TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_en TEXT... | Duration: 1ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS title_hi TEXT... | Duration: 2ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_en TEXT... | Duration: 3ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS description_hi TEXT... | Duration: 3ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS hero_image TEXT... | Duration: 3ms
-[DB Query] SUCCESS: ALTER TABLE academics ADD COLUMN IF NOT EXISTS content JSONB... | Duration: 6ms
-[DB Query] ERROR: relation "academics_page_name_unique" already exists on query: ALTER TABLE academics ADD CONSTRAINT academics_page_name_unique UNIQUE (page_name)
-[DB Query] SUCCESS: SELECT id FROM chairperson LIMIT 1... | Duration: 29ms
-[DB Query] SUCCESS: SELECT id FROM administration_registrar LIMIT 1... | Duration: 3ms
-[DB Query] SUCCESS: SELECT id FROM administration_dean LIMIT 1... | Duration: 3ms
-[DB Query] SUCCESS: SELECT id FROM administration_vigilance_downloads LIMIT 1... | Duration: 2ms
-[DB Query] SUCCESS: SELECT id FROM academic_tables WHERE table_name = 'functionaries' LIMIT 1... | Duration: 15ms
-[DB Query] SUCCESS: SELECT id FROM academics WHERE page_name = 'activities' LIMIT 1... | Duration: 12ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 6ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 2ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 3ms
-[DB Query] SUCCESS: INSERT INTO students (page_name, title_en, title_hi, description_en, description_hi, content) VALUES... | Duration: 14ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 1ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 0ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 0ms
-Server started at 2026-05-29T09:06:34.350Z on port 5000. process.env.PORT is 5000
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 214ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 3ms
-[DB Query] SUCCESS: SELECT id FROM students WHERE page_name = $1... | Duration: 18ms
-[DB Query] SUCCESS: UPDATE students SET title_en = $2, title_hi = $3, description_en = $4, description_hi = $5, hero_ima... | Duration: 14ms
-[DB Query] SUCCESS: SELECT * FROM students WHERE page_name = $1 ORDER BY id... | Duration: 5ms
+Server started at 2026-08-13T02:54:07.781Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:08.786Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:09.999Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:11.134Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:12.215Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:13.701Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:14.648Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:15.716Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:16.795Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:18.023Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:32.580Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:38.938Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:42.252Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:44.136Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:46.414Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T02:54:49.530Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 4390ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 4403ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 4409ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 4410ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 4423ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 289ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3412ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3869ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3871ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3872ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3873ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 299ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 4453ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 4671ms
+Server started at 2026-08-13T16:04:31.634Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 13099ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 14162ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 276ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 14516ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 12281ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 12292ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 12291ms
+Server started at 2026-08-13T17:41:39.538Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T17:41:55.906Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM faculties_table ORDER BY created_at DESC... | Duration: 5146ms
+[DB Query] SUCCESS: SELECT * FROM faculties_table ORDER BY created_at DESC... | Duration: 4463ms
+[DB Query] SUCCESS: SELECT * FROM faculties_table ORDER BY created_at DESC... | Duration: 3899ms
+Server started at 2026-08-13T18:21:02.028Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T18:22:50.849Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: INSERT INTO faculties_table (
+        name_en, name_hi, role_en, role_hi, designation_en, designatio... | Duration: 3466ms
+[DB Query] SUCCESS: SELECT * FROM faculties_table ORDER BY created_at DESC... | Duration: 314ms
+[DB Query] ERROR: relation "aboutnith" does not exist on query: SELECT * FROM aboutnith WHERE id = $1
+[DB Query] ERROR: relation "aboutnith" does not exist on query: SELECT * FROM aboutnith WHERE id = $1
+Server started at 2026-08-13T19:27:23.402Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:28:37.384Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:29:55.448Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:30:56.387Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:32:20.035Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:33:36.151Z on port 4000. process.env.PORT is 4000
+[DB Query] ERROR: relation "aboutnith" does not exist on query: SELECT * FROM aboutnith WHERE id = $1
+[DB Query] ERROR: relation "aboutnith" does not exist on query: SELECT * FROM aboutnith WHERE id = $1
+Server started at 2026-08-13T19:57:31.334Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:57:45.057Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:58:06.092Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T19:59:47.383Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:00:02.186Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:00:17.651Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:00:32.437Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:01:30.370Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:18:13.257Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:18:22.753Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:18:47.246Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:18:55.029Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM about_nith_goals ORDER BY id ASC... | Duration: 395ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_core_values ORDER BY id ASC... | Duration: 3495ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_core_values ORDER BY id ASC... | Duration: 3981ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_timeline ORDER BY id ASC... | Duration: 403ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_timeline ORDER BY id ASC... | Duration: 3495ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_core_values ORDER BY id ASC... | Duration: 440ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_core_values ORDER BY id ASC... | Duration: 445ms
+Server started at 2026-08-13T20:37:45.749Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:38:12.578Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:38:20.663Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T20:38:28.540Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: INSERT INTO anchor_links (id, link_text, link_url) VALUES ($1, $2, $3) RETURNING *... | Duration: 3465ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3607ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3607ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 305ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 316ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3862ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3678ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3678ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3325ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3507ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3546ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 292ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 295ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 293ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 281ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 295ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3406ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3344ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 318ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 287ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3374ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 291ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 307ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 308ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3552ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3718ms
+Server started at 2026-08-13T21:05:41.251Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T21:12:37.825Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T21:12:46.604Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3514ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 286ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 493ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 306ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 292ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 290ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3874ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3875ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3939ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 318ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3864ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3930ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4834ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 383ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 384ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 1109ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 1111ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4077ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4079ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 8879ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3611ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3685ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_missions ORDER BY id ASC... | Duration: 3959ms
+[DB Query] SUCCESS: SELECT * FROM about_nith_missions ORDER BY id ASC... | Duration: 3907ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 322ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 324ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 5444ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 300ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 303ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3626ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3559ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 314ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3676ms
+[DB Query] SUCCESS: SELECT * FROM senate_members ORDER BY created_at ASC... | Duration: 4065ms
+[DB Query] SUCCESS: SELECT * FROM senate_members ORDER BY created_at ASC... | Duration: 370ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 4947ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 305ms
+[DB Query] SUCCESS: SELECT * FROM senate_members ORDER BY created_at ASC... | Duration: 5312ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 5349ms
+Server started at 2026-08-13T21:41:19.571Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 11153ms
+Server started at 2026-08-13T21:45:36.694Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-13T21:48:09.143Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: INSERT INTO senate_minutes (title, meeting_date, document_url, uploaded_by)
+      VALUES ($1, $2, $3... | Duration: 4113ms
+[DB Query] SUCCESS: SELECT * FROM fc_minutes ORDER BY meeting_date DESC... | Duration: 3564ms
+[DB Query] SUCCESS: SELECT * FROM fc_minutes ORDER BY meeting_date DESC... | Duration: 311ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 357ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 307ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 305ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 299ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 318ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3563ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 290ms
+[DB Query] SUCCESS: SELECT * FROM senate_minutes ORDER BY meeting_date DESC... | Duration: 299ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3460ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 5086ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4288ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4290ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3366ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3401ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3404ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3408ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3481ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 288ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3408ms
+[DB Query] SUCCESS: SELECT * FROM faculties_forwarding_heading ORDER BY id DESC LIMIT 1... | Duration: 3582ms
+[DB Query] SUCCESS: SELECT * FROM faculties_forwarding_list ORDER BY id DESC... | Duration: 509ms

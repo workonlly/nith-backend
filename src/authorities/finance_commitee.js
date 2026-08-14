@@ -1,9 +1,9 @@
 const express = require('express');
-const { DeleteObjectCommand } = require('@aws-sdk/client-s3');
-const pool = require('../db/db');
-const s3Client = require('../db/minio');
 
-const { uploadAuthorities, AUTHORITY_BUCKET } = require('../middleware/upload');
+const pool = require('../db/db');
+
+
+const { uploadAuthorities, deleteLocalFile } = require('../middleware/upload');
 
 const router = express.Router();
 const uploadFile = uploadAuthorities.single('file');
@@ -17,22 +17,7 @@ const validateUuid = (req, res, next) => {
   next();
 };
 
-const deleteMinioFile = async (fileUrl) => {
-  if (!fileUrl) return;
-  try {
-    const urlParts = fileUrl.split(`/${AUTHORITY_BUCKET}/`);
-    if (urlParts.length < 2) return;
-    const fileKey = decodeURIComponent(urlParts[1]);
 
-    await s3Client.send(new DeleteObjectCommand({
-      Bucket: AUTHORITY_BUCKET,
-      Key: fileKey,
-    }));
-    console.log(`[MinIO] Successfully purged key: ${fileKey}`);
-  } catch (err) {
-    console.error(`[MinIO] Failed to drop storage item (${fileUrl}):`, err);
-  }
-};
 
 /* ==========================================================================
    FC MEMBERS ENDPOINTS
@@ -167,7 +152,7 @@ router.post('/minutes', uploadFile, async (req, res) => {
     const { title, date, uploadedBy } = req.body;
     if (!uploadedLocation) return res.status(400).json({ error: 'Document PDF file upload is required.' });
     if (!title || !date) {
-      await deleteMinioFile(uploadedLocation); 
+      await deleteLocalFile(uploadedLocation); 
       return res.status(400).json({ error: 'Title and Date fields are required.' });
     }
 
@@ -187,7 +172,7 @@ router.post('/minutes', uploadFile, async (req, res) => {
       uploadedBy: created.uploaded_by
     });
   } catch (err) {
-    if (uploadedLocation) await deleteMinioFile(uploadedLocation);
+    if (uploadedLocation) await deleteLocalFile(uploadedLocation);
     console.error('POST /minutes error:', err);
     res.status(500).json({ error: 'Failed to save meeting minutes record.' });
   }
@@ -201,13 +186,13 @@ router.put('/minutes/:id', validateUuid, uploadFile, async (req, res) => {
 
     const oldRecord = await pool.query('SELECT * FROM fc_minutes WHERE id = $1', [id]);
     if (oldRecord.rows.length === 0) {
-      if (newUploadedLocation) await deleteMinioFile(newUploadedLocation);
+      if (newUploadedLocation) await deleteLocalFile(newUploadedLocation);
       return res.status(404).json({ error: 'Meeting minutes record not found' });
     }
 
     let finalUrl = oldRecord.rows[0].document_url;
     if (newUploadedLocation) {
-      await deleteMinioFile(finalUrl); 
+      await deleteLocalFile(finalUrl); 
       finalUrl = newUploadedLocation;
     }
 
@@ -234,7 +219,7 @@ router.put('/minutes/:id', validateUuid, uploadFile, async (req, res) => {
       uploadedBy: updated.uploaded_by
     });
   } catch (err) {
-    if (newUploadedLocation) await deleteMinioFile(newUploadedLocation);
+    if (newUploadedLocation) await deleteLocalFile(newUploadedLocation);
     console.error('PUT /minutes/:id error:', err);
     res.status(500).json({ error: 'Failed to update meeting minutes.' });
   }
@@ -247,7 +232,7 @@ router.delete('/minutes/:id', validateUuid, async (req, res) => {
     if (record.rows.length === 0) return res.status(404).json({ error: 'Minutes record not found.' });
 
     const fileUrl = record.rows[0].document_url;
-    if (fileUrl) await deleteMinioFile(fileUrl);
+    if (fileUrl) await deleteLocalFile(fileUrl);
 
     await pool.query('DELETE FROM fc_minutes WHERE id = $1', [id]);
     res.json({ success: true, message: 'Meeting minutes and storage documents cleaned up.' });

@@ -42,80 +42,7 @@ CREATE INDEX idx_faculty_role_assignment_faculty_id ON faculty_role_assignment(f
 CREATE INDEX idx_faculty_role_assignment_position_id ON faculty_role_assignment(position_id);
 CREATE INDEX idx_faculty_role_assignment_category_id ON faculty_role_assignment(category_id);
 
--- Homepage table
-CREATE TABLE homepage (
-    id SERIAL PRIMARY KEY,
-    heroMaintext VARCHAR(255),
-    heroSubheading VARCHAR(255),
-    heroDescheading VARCHAR(500),
-    aboutDesc TEXT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
-CREATE TABLE hero_image(
-    id SERIAL PRIMARY KEY,
-    image VARCHAR(255),
-    image_url VARCHAR(2048)
-);
-
--- homepage settings schema
-CREATE TABLE home_hero(
-    id SERIAL PRIMARY KEY,
-    image VARCHAR(255),
-    image_url VARCHAR(2048)
-);
-
-
-
-
--- homepage settings schema end here
-
--- Events table
-CREATE TABLE Events (
-    id SERIAL PRIMARY KEY,
-    Heading VARCHAR(255),
-    Subheading VARCHAR(255),
-    Description TEXT,
-    image TEXT,
-    startedAt DATE,
-    endedAt DATE,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- News table
-CREATE TABLE News (
-    id SERIAL PRIMARY KEY,
-    Heading VARCHAR(255),
-    Subheading VARCHAR(255),
-    Description VARCHAR(500),
-    image TEXT,
-    startedAt DATE,
-    endedAt DATE,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Achievements table
-CREATE TABLE Achievements (
-    id SERIAL PRIMARY KEY,
-    tagline VARCHAR(255),
-    Heading VARCHAR(255),
-    description VARCHAR(500),
-    image TEXT,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Galley table (corrected spelling from 'Galley' to 'Gallery' if intended)
-CREATE TABLE Galley (
-    id SERIAL PRIMARY KEY,
-    image TEXT,
-    name VARCHAR(100),
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 -- aboutnith start here
 CREATE TABLE aboutnith(
@@ -140,7 +67,6 @@ CREATE TABLE aboutnith_history_timeline (
     event_date DATE,
     description TEXT
 );
--- aboutnith end here
 
 -- authorities start here
 CREATE TABLE authorities(
@@ -166,7 +92,6 @@ CREATE TABLE authorities_composition_of_senate(
     department VARCHAR(255),
     college VARCHAR(255)
 );
--- authorities end here
 
 -- administration start here 
 CREATE TABLE administration_viligence_officer(
@@ -196,14 +121,8 @@ CREATE TABLE administration_dean(
     email VARCHAR(255),
     phone VARCHAR(20)
 );
--- administration end here 
 
--- Academics starts here
-CREATE TABLE academics(
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255),
-    description TEXT
-);
+
 
 CREATE TABLE acdemics_tables(
     id SERIAL PRIMARY KEY,
@@ -222,7 +141,6 @@ CREATE TABLE academics_links(
     word_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- Academics end here
 
 -- student start here
 CREATE TABLE student_(
@@ -257,7 +175,6 @@ CREATE TABLE student_hostel_nith(
     photo_href VARCHAR(255),
     description TEXT
 );
--- student end here
 
 -- faculty start here
 CREATE TABLE faculty_table(
@@ -280,7 +197,6 @@ CREATE TABLE faculty_links(
     description VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- faculty end here
 
 -- Alumini section start here
 CREATE TABLE alumini_activites(
@@ -341,7 +257,6 @@ CREATE TABLE distinguishedalumni (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- alumni section end here
 
 -- Download Categories and Downloads Tables
 CREATE TABLE ug_tables (
@@ -355,6 +270,7 @@ CREATE TABLE ug_tables (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 -- academic_notices start here
 CREATE TABLE academic_notices (
     id SERIAL PRIMARY KEY,
@@ -366,4 +282,3 @@ CREATE TABLE academic_notices (
     download_url VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
--- academic_notices end here
