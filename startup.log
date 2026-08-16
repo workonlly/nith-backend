@@ -313,3 +313,5 @@ Server started at 2026-08-16T17:56:02.270Z on port 4000. process.env.PORT is 400
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 7671ms
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3748ms
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4155ms
+Server started at 2026-08-16T19:45:24.035Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T19:45:46.379Z on port 4000. process.env.PORT is 4000

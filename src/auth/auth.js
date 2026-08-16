@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db/db");
 const jwt = require("jsonwebtoken");
+const { authenticateToken } = require("../middlewares/auth");
 
-// POST /faculty/login or /auth/faculty/login
+// POST /auth/faculty/login — verify credentials and issue JWT
 router.post("/faculty/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -79,6 +80,53 @@ router.post("/faculty/login", async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal server error during authentication"
+    });
+  }
+});
+
+// GET /auth/faculty/verify — verify JWT token and confirm faculty still exists in DB
+router.get("/faculty/verify", authenticateToken, async (req, res) => {
+  try {
+    // req.user is set by authenticateToken middleware (contains id, email, status, tag, etc.)
+    const { id } = req.user;
+
+    // Cross-check that faculty still exists in faculties_table
+    const result = await pool.query(
+      `SELECT id, name_en, email, status, tag, faculty_id, department_en, designation_en
+       FROM faculties_table
+       WHERE id = $1`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({
+        success: false,
+        message: "Faculty account no longer exists."
+      });
+    }
+
+    const faculty = result.rows[0];
+
+    return res.status(200).json({
+      success: true,
+      message: "Token is valid. Faculty verified.",
+      faculty: {
+        id: faculty.id,
+        faculty_id: faculty.faculty_id,
+        name: faculty.name_en,
+        email: faculty.email,
+        status: faculty.status,
+        tag: faculty.tag,
+        department: faculty.department_en,
+        designation: faculty.designation_en
+      }
+    });
+
+  } catch (err) {
+    console.error("Faculty verify error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error during verification"
     });
   }
 });
