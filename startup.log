@@ -180,3 +180,136 @@ Server started at 2026-08-13T21:48:09.143Z on port 4000. process.env.PORT is 400
 [DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3408ms
 [DB Query] SUCCESS: SELECT * FROM faculties_forwarding_heading ORDER BY id DESC LIMIT 1... | Duration: 3582ms
 [DB Query] SUCCESS: SELECT * FROM faculties_forwarding_list ORDER BY id DESC... | Duration: 509ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3698ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3698ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3700ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3700ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3714ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 290ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3429ms
+[DB Query] ERROR: getaddrinfo ENOTFOUND ep-purple-bread-axpruryg-pooler.c-4.us-east-2.aws.neon.tech on query: SELECT * FROM about_nith_timeline ORDER BY id ASC
+[DB Query] ERROR: getaddrinfo ENOTFOUND ep-purple-bread-axpruryg-pooler.c-4.us-east-2.aws.neon.tech on query: SELECT * FROM about_nith_timeline ORDER BY id ASC
+[DB Query] ERROR: getaddrinfo ENOTFOUND ep-purple-bread-axpruryg-pooler.c-4.us-east-2.aws.neon.tech on query: SELECT * FROM about_nith_timeline ORDER BY id ASC
+Server started at 2026-08-13T22:08:30.235Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T13:40:25.959Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3805ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3806ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3819ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3853ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 272ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3462ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3757ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 5566ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 5569ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 5602ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 5608ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 2189ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 2190ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 2058ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 1758ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 296ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 3567ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3628ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 3628ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3630ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 3446ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3599ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4847ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4850ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4052ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4054ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 4073ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 4087ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 4092ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 4104ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 4112ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 270ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 258ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 263ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 262ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 271ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 3530ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 290ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 287ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 1125ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 338ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 314ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 5415ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 5466ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 5488ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 270ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 283ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 279ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 300ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 286ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3749ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 6317ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 6456ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 6459ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 6459ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 6459ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 336ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 5370ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3942ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 4191ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 4245ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 4246ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 4247ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 288ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 3419ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3444ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 4162ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 287ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 3647ms
+[DB Query] SUCCESS: SELECT * FROM events ORDER BY id ASC... | Duration: 2952ms
+[DB Query] SUCCESS: SELECT * FROM about ORDER BY id DESC LIMIT 1... | Duration: 309ms
+[DB Query] SUCCESS: SELECT * FROM academics ORDER BY id ASC... | Duration: 4081ms
+[DB Query] SUCCESS: SELECT * FROM newss ORDER BY id ASC... | Duration: 4171ms
+[DB Query] SUCCESS: SELECT * FROM admissions ORDER BY id ASC... | Duration: 4176ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 2782ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 3298ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 393ms
+[DB Query] SUCCESS: SELECT * FROM placements ORDER BY id ASC LIMIT 1... | Duration: 5404ms
+[DB Query] SUCCESS: SELECT * FROM achievements ORDER BY id ASC... | Duration: 4632ms
+Server started at 2026-08-16T17:43:58.954Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:06.535Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:09.669Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:16.630Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:22.905Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:27.274Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:28.278Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:32.308Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:35.167Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:36.379Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:37.628Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:48.685Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:50.494Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:52.855Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:44:55.595Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:00.187Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:01.171Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:02.936Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:09.725Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:15.422Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:20.198Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:21.795Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:24.047Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:26.671Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:30.116Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:40.753Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:42.856Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:44.543Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:45:45.655Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:49:35.183Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:49:37.753Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:49:42.149Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:55:42.541Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:55:53.399Z on port 4000. process.env.PORT is 4000
+Server started at 2026-08-16T17:56:02.270Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT id, name_en, email, password, status, tag, faculty_id, department_en, role_en, designation_en... | Duration: 4026ms
+[DB Query] SUCCESS: SELECT id, name_en, email, password, status, tag, faculty_id, department_en, role_en, designation_en... | Duration: 405ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 7671ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 7671ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 3748ms
+[DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4155ms

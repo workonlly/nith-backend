@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS faculties_table (
     department_en VARCHAR(255) NOT NULL,
     department_hi VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    password TEXT NOT NULL,
     phone_no VARCHAR(255) NOT NULL,
     faculty_id VARCHAR(255) NOT NULL,
     since_date_en VARCHAR(255) NOT NULL,
