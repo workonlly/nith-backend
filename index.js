@@ -167,13 +167,10 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const fs = require('fs');
 app.listen(PORT, '0.0.0.0', () => {
-  const msg = `Server started at ${new Date().toISOString()} on port ${PORT}. process.env.PORT is ${process.env.PORT}\n`;
+  const msg = `Server started at ${new Date().toISOString()} on port ${PORT}. process.env.PORT is ${process.env.PORT}`;
   console.log(msg);
-  fs.appendFileSync(path.resolve(__dirname, 'startup.log'), msg);
 }).on('error', (err) => {
-  const errMsg = `Server failed to start: ${err.message}\n`;
+  const errMsg = `Server failed to start: ${err.message}`;
   console.error(errMsg);
-  fs.appendFileSync(path.resolve(__dirname, 'startup.log'), errMsg);
 });
