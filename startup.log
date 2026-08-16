@@ -315,3 +315,7 @@ Server started at 2026-08-16T17:56:02.270Z on port 4000. process.env.PORT is 400
 [DB Query] SUCCESS: SELECT * FROM anchor_links ORDER BY created_at DESC... | Duration: 4155ms
 Server started at 2026-08-16T19:45:24.035Z on port 4000. process.env.PORT is 4000
 Server started at 2026-08-16T19:45:46.379Z on port 4000. process.env.PORT is 4000
+[DB Query] SUCCESS: SELECT id, name_en, email, status, tag, faculty_id, department_en, designation_en
+       FROM facult... | Duration: 4545ms
+[DB Query] SUCCESS: SELECT id, name_en, email, password, status, tag, faculty_id, department_en, role_en, designation_en... | Duration: 4021ms
+Server started at 2026-08-16T19:59:01.648Z on port 4000. process.env.PORT is 4000
