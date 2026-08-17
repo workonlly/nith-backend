@@ -2228,7 +2228,53 @@ CREATE TABLE IF NOT EXISTS department_research_supervision(
 -- ========================================================================
 -- academics
 -- ==========================================
+CREATE TABLE IF NOT EXISTS academics_activites (
+    id SERIAL PRIMARY KEY,
+    title_en VARCHAR(255) NOT NULL,
+    title_hn VARCHAR(255),
+    description_en TEXT,
+    description_hn TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
+CREATE TABLE IF NOT EXISTS academics_fucntionaries (
+    id SERIAL PRIMARY KEY,
+    title_en VARCHAR(255) NOT NULL,
+    title_hn VARCHAR(255),
+    name_en VARCHAR(255) NOT NULL,
+    name_hn VARCHAR(255),
+    responsibility_en TEXT,
+    phone TEXT,
+    email TEXT,
+    faculty_id INTEGER REFERENCES faculties_table(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS students_fucntionaries (
+    id SERIAL PRIMARY KEY,
+    title_en VARCHAR(255) NOT NULL,
+    title_hn VARCHAR(255),
+    name_en VARCHAR(255) NOT NULL,
+    name_hn VARCHAR(255),
+    responsibility_en TEXT,
+    phone TEXT,
+    email TEXT,
+    faculty_id INTEGER REFERENCES faculties_table(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS students_activites (
+    id SERIAL PRIMARY KEY,
+    title_en VARCHAR(255) NOT NULL,
+    title_hn VARCHAR(255),
+    description_en TEXT,
+    description_hn TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 --=====================================================
 
