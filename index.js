@@ -136,6 +136,11 @@ app.use('/senate', senateRoutes);
 app.use('/fc',     fcRoutes);
 app.use('/anchor-links', anchorLinksRoutes);
 
+// ── Administration routes ──────────────────────────────────────────────────
+const administrationRoutes = require('./src/administration');
+app.use('/api/administration', administrationRoutes);
+app.use('/administration',     administrationRoutes);
+
 // ── File upload route ──────────────────────────────────────────────────────
 app.post('/api/upload', (req, res) => {
   upload.single('file')(req, res, (err) => {

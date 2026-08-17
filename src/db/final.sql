@@ -2613,3 +2613,172 @@ CREATE TABLE IF NOT EXISTS anchor_links(
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- ===============================================================================
+--administration
+
+CREATE TABLE IF NOT EXIST administration_visitor(
+    id SERIAL PRIMARY KEY;
+    image TEXT,
+    heading_en VARCHAR(255) NOT NULL,
+    heading_hi VARCHAR(255) NOT NULL,
+    description_en TEXT NOT NULL,
+    description_hi TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXIST administration_chief_vigilence_officer(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    responsibility VARCHAR(255),
+    phone_no VARCHAR(15),
+    email VARCHAR(255)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXIST administration_chief_vigilence_officer_links(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+     links TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXIST administration_chairperson(
+    id SERIAL PRIMARY KEY;
+    image TEXT,
+    heading_en VARCHAR(255) NOT NULL,
+    heading_hi VARCHAR(255) NOT NULL,
+    description_en TEXT NOT NULL,
+    description_hi TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXIST administration_former_chairperson(
+    id SERIAL PRIMARY KEY,
+    image TEXT,
+    type VARCHAR(50),
+    heading_en VARCHAR(255) NOT NULL,
+    heading_hi VARCHAR(255) NOT NULL,
+    dates TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS administration_dean_associate_dean(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+   responsibility VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS administration_institutecoordinator(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+   responsibility VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXIST administration_messagefromdir(
+    id SERIAL PRIMARY KEY,
+    image TEXT,
+    heading_en VARCHAR(255) NOT NULL,
+    heading_hi VARCHAR(255) NOT NULL,
+    description_en TEXT NOT NULL,
+    description_hi TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXIST administration_former_directors(
+    id SERIAL PRIMARY KEY,
+    image TEXT,
+    type VARCHAR(50),
+    heading_en VARCHAR(255) NOT NULL,
+    heading_hi VARCHAR(255) NOT NULL,
+    dates TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS administration_directoroffice(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+   designation VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS administration_HOD(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    departments VARCHAR(255)
+   designation VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS administration_faculty_incharge(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    departments VARCHAR(255)
+   designation VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXIST administration_registrar(
+    id SERIAL PRIMARY KEY,
+    image TEXT,
+    heading_en VARCHAR(255) NOT NULL,
+    heading_hi VARCHAR(255) NOT NULL,
+    description_en TEXT NOT NULL,
+    description_hi TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS administration_registraroffice(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+   designation VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS administration_nodalofficers(
+    id SERIAL PRIMARY KEY,
+    faculty_id REFERENCES faculty_tables(id) ON DELETE CASCADE,
+    type VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+   designation VARCHAR(255),
+   phone_no TEXT,
+   email TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
