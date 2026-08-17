@@ -1,8 +1,5 @@
 const express = require('express');
-
 const pool = require('../db/db');
-
-
 const { uploadAuthorities, deleteLocalFile } = require('../middleware/upload');
 
 const router = express.Router();
@@ -16,8 +13,6 @@ const validateUuid = (req, res, next) => {
   }
   next();
 };
-
-
 
 /* ==========================================================================
    FC MEMBERS ENDPOINTS
@@ -33,7 +28,8 @@ router.get('/members', async (req, res) => {
       affiliation: row.affiliation,
       position: row.position,
       email: row.email,
-      contactPhone: row.contact_phone
+      contactPhone: row.contact_phone,
+      contact_phone: row.contact_phone,
     }));
     res.json(mappedRows);
   } catch (err) {
@@ -44,8 +40,10 @@ router.get('/members', async (req, res) => {
 
 router.post('/members', async (req, res) => {
   try {
-    const { id, name, designation, affiliation, position, email, contactPhone } = req.body;
+    const { id, name, designation, affiliation, position, email, contactPhone, contact_phone } = req.body;
     if (!name) return res.status(400).json({ error: 'Member name is required.' });
+
+    const phoneVal = contactPhone || contact_phone || '';
 
     let query;
     let params;
@@ -55,60 +53,43 @@ router.post('/members', async (req, res) => {
         INSERT INTO fc_members (id, name, designation, affiliation, position, email, contact_phone)
         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
       `;
-      params = [id, name, designation, affiliation, position, email, contactPhone];
+      params = [id, name, designation, affiliation, position, email, phoneVal];
     } else {
       query = `
         INSERT INTO fc_members (name, designation, affiliation, position, email, contact_phone)
         VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
       `;
-      params = [name, designation, affiliation, position, email, contactPhone];
+      params = [name, designation, affiliation, position, email, phoneVal];
     }
 
     const result = await pool.query(query, params);
-    const created = result.rows[0];
-
-    res.status(201).json({
-      id: created.id,
-      name: created.name,
-      designation: created.designation,
-      affiliation: created.affiliation,
-      position: created.position,
-      email: created.email,
-      contactPhone: created.contact_phone
-    });
+    res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error('POST /members error:', err);
-    res.status(500).json({ error: 'Failed to create member record.' });
+    res.status(500).json({ error: 'Failed to create FC member record.' });
   }
 });
 
 router.put('/members/:id', validateUuid, async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, designation, affiliation, position, email, contactPhone } = req.body;
-    if (!name) return res.status(400).json({ error: 'Member name is required.' });
+    const { name, designation, affiliation, position, email, contactPhone, contact_phone } = req.body;
+    if (!name) return res.status(400).json({ error: 'Name is required.' });
+
+    const phoneVal = contactPhone || contact_phone || '';
 
     const query = `
       UPDATE fc_members
       SET name = $1, designation = $2, affiliation = $3, position = $4, email = $5, contact_phone = $6
       WHERE id = $7 RETURNING *
     `;
-    const result = await pool.query(query, [name, designation, affiliation, position, email, contactPhone, id]);
-    if (result.rows.length === 0) return res.status(404).json({ error: 'Member not found.' });
+    const result = await pool.query(query, [name, designation, affiliation, position, email, phoneVal, id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: 'FC member not found.' });
 
-    const updated = result.rows[0];
-    res.json({
-      id: updated.id,
-      name: updated.name,
-      designation: updated.designation,
-      affiliation: updated.affiliation,
-      position: updated.position,
-      email: updated.email,
-      contactPhone: updated.contact_phone
-    });
+    res.json(result.rows[0]);
   } catch (err) {
     console.error('PUT /members/:id error:', err);
-    res.status(500).json({ error: 'Failed to update member record.' });
+    res.status(500).json({ error: 'Failed to update FC member record.' });
   }
 });
 
@@ -116,16 +97,16 @@ router.delete('/members/:id', validateUuid, async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query('DELETE FROM fc_members WHERE id = $1 RETURNING *', [id]);
-    if (result.rows.length === 0) return res.status(404).json({ error: 'Member not found.' });
-    res.json({ success: true, message: 'Member clean-up successful.' });
+    if (result.rows.length === 0) return res.status(404).json({ error: 'FC member not found.' });
+    res.json({ success: true, message: 'FC member deleted successfully.' });
   } catch (err) {
     console.error('DELETE /members/:id error:', err);
-    res.status(500).json({ error: 'Failed to erase member record.' });
+    res.status(500).json({ error: 'Failed to delete FC member record.' });
   }
 });
 
 /* ==========================================================================
-   MEETING MINUTES ENDPOINTS
+   FC MINUTES ENDPOINTS
    ========================================================================== */
 
 router.get('/minutes', async (req, res) => {
@@ -134,94 +115,105 @@ router.get('/minutes', async (req, res) => {
     const mappedRows = result.rows.map(row => ({
       id: row.id,
       title: row.title,
-      date: row.meeting_date ? row.meeting_date.toISOString().split('T')[0] : '',
+      meeting_date: row.meeting_date,
+      date: row.meeting_date ? new Date(row.meeting_date).toISOString().split('T')[0] : '',
+      document_url: row.document_url,
       documentUrl: row.document_url,
-      uploadedDate: row.uploaded_date ? row.uploaded_date.toISOString().split('T')[0] : '',
-      uploadedBy: row.uploaded_by
+      uploaded_date: row.uploaded_date,
+      uploadedDate: row.uploaded_date,
+      uploaded_by: row.uploaded_by,
+      uploadedBy: row.uploaded_by,
     }));
     res.json(mappedRows);
   } catch (err) {
     console.error('GET /minutes error:', err);
-    res.status(500).json({ error: 'Internal server error while fetching minutes.' });
+    res.status(500).json({ error: 'Internal server error while fetching FC minutes.' });
   }
 });
 
-router.post('/minutes', uploadFile, async (req, res) => {
-  let uploadedLocation = req.file ? req.file.location : null;
+router.post('/minutes', (req, res, next) => {
+  uploadFile(req, res, (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    next();
+  });
+}, async (req, res) => {
   try {
-    const { title, date, uploadedBy } = req.body;
-    if (!uploadedLocation) return res.status(400).json({ error: 'Document PDF file upload is required.' });
-    if (!title || !date) {
-      await deleteLocalFile(uploadedLocation); 
-      return res.status(400).json({ error: 'Title and Date fields are required.' });
+    const { title, date, meetingDate, meeting_date, uploadedBy, uploaded_by, documentUrl, document_url } = req.body;
+    const finalDocUrl = req.file ? req.file.location : (documentUrl || document_url);
+
+    if (!title || !finalDocUrl) {
+      return res.status(400).json({ error: 'Title and Document URL/file are required.' });
     }
+
+    const meetingDateVal = date || meetingDate || meeting_date || new Date().toISOString().split('T')[0];
+    const uploader = uploadedBy || uploaded_by || 'Admin';
 
     const query = `
       INSERT INTO fc_minutes (title, meeting_date, document_url, uploaded_by)
       VALUES ($1, $2, $3, $4) RETURNING *
     `;
-    const result = await pool.query(query, [title, date, uploadedLocation, uploadedBy || 'Admin']);
+    const result = await pool.query(query, [title, meetingDateVal, finalDocUrl, uploader]);
     const created = result.rows[0];
 
     res.status(201).json({
       id: created.id,
       title: created.title,
-      date: created.meeting_date.toISOString().split('T')[0],
+      date: created.meeting_date,
+      meeting_date: created.meeting_date,
       documentUrl: created.document_url,
-      uploadedDate: created.uploaded_date.toISOString().split('T')[0],
-      uploadedBy: created.uploaded_by
+      document_url: created.document_url,
+      uploadedBy: created.uploaded_by,
     });
   } catch (err) {
-    if (uploadedLocation) await deleteLocalFile(uploadedLocation);
     console.error('POST /minutes error:', err);
-    res.status(500).json({ error: 'Failed to save meeting minutes record.' });
+    res.status(500).json({ error: 'Failed to record FC minutes.' });
   }
 });
 
-router.put('/minutes/:id', validateUuid, uploadFile, async (req, res) => {
-  let newUploadedLocation = req.file ? req.file.location : null;
+router.put('/minutes/:id', validateUuid, (req, res, next) => {
+  uploadFile(req, res, (err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    next();
+  });
+}, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, date, uploadedBy } = req.body;
+    const { title, date, meetingDate, meeting_date, uploadedBy, uploaded_by, documentUrl, document_url } = req.body;
 
     const oldRecord = await pool.query('SELECT * FROM fc_minutes WHERE id = $1', [id]);
-    if (oldRecord.rows.length === 0) {
-      if (newUploadedLocation) await deleteLocalFile(newUploadedLocation);
-      return res.status(404).json({ error: 'Meeting minutes record not found' });
+    if (oldRecord.rows.length === 0) return res.status(404).json({ error: 'Record not found.' });
+
+    let currentUrl = oldRecord.rows[0].document_url;
+    if (req.file) {
+      await deleteLocalFile(currentUrl);
+      currentUrl = req.file.location;
+    } else if (documentUrl || document_url) {
+      currentUrl = documentUrl || document_url;
     }
 
-    let finalUrl = oldRecord.rows[0].document_url;
-    if (newUploadedLocation) {
-      await deleteLocalFile(finalUrl); 
-      finalUrl = newUploadedLocation;
-    }
+    const meetingDateVal = date || meetingDate || meeting_date || oldRecord.rows[0].meeting_date;
+    const uploader = uploadedBy || uploaded_by || oldRecord.rows[0].uploaded_by;
 
     const query = `
       UPDATE fc_minutes
-      SET title = $1, meeting_date = $2, document_url = $3, uploaded_by = $4
+      SET title = $1, meeting_date = $2, document_url = $3, uploaded_by = $4, updated_at = CURRENT_TIMESTAMP
       WHERE id = $5 RETURNING *
     `;
-    const result = await pool.query(query, [
-      title || oldRecord.rows[0].title,
-      date || oldRecord.rows[0].meeting_date,
-      finalUrl,
-      uploadedBy || oldRecord.rows[0].uploaded_by,
-      id
-    ]);
-
+    const result = await pool.query(query, [title || oldRecord.rows[0].title, meetingDateVal, currentUrl, uploader, id]);
     const updated = result.rows[0];
+
     res.json({
       id: updated.id,
       title: updated.title,
-      date: updated.meeting_date.toISOString().split('T')[0],
+      date: updated.meeting_date,
+      meeting_date: updated.meeting_date,
       documentUrl: updated.document_url,
-      uploadedDate: updated.uploaded_date.toISOString().split('T')[0],
-      uploadedBy: updated.uploaded_by
+      document_url: updated.document_url,
+      uploadedBy: updated.uploaded_by,
     });
   } catch (err) {
-    if (newUploadedLocation) await deleteLocalFile(newUploadedLocation);
     console.error('PUT /minutes/:id error:', err);
-    res.status(500).json({ error: 'Failed to update meeting minutes.' });
+    res.status(500).json({ error: 'Failed to update FC minutes.' });
   }
 });
 
@@ -229,16 +221,16 @@ router.delete('/minutes/:id', validateUuid, async (req, res) => {
   try {
     const { id } = req.params;
     const record = await pool.query('SELECT document_url FROM fc_minutes WHERE id = $1', [id]);
-    if (record.rows.length === 0) return res.status(404).json({ error: 'Minutes record not found.' });
+    if (record.rows.length === 0) return res.status(404).json({ error: 'Record not found.' });
 
     const fileUrl = record.rows[0].document_url;
     if (fileUrl) await deleteLocalFile(fileUrl);
 
     await pool.query('DELETE FROM fc_minutes WHERE id = $1', [id]);
-    res.json({ success: true, message: 'Meeting minutes and storage documents cleaned up.' });
+    res.json({ success: true, message: 'FC minutes deleted successfully.' });
   } catch (err) {
     console.error('DELETE /minutes/:id error:', err);
-    res.status(500).json({ error: 'Failed to complete minutes deletion.' });
+    res.status(500).json({ error: 'Failed to delete FC minutes.' });
   }
 });
 
