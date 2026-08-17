@@ -141,6 +141,10 @@ const administrationRoutes = require('./src/administration');
 app.use('/api/administration', administrationRoutes);
 app.use('/administration',     administrationRoutes);
 
+// ── Department routes ──────────────────────────────────────────────────────
+const departmentRoutes = require('./src/departments');
+app.use('/api/departments', departmentRoutes);
+
 // ── File upload route ──────────────────────────────────────────────────────
 app.post('/api/upload', (req, res) => {
   upload.single('file')(req, res, (err) => {
