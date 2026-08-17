@@ -1454,18 +1454,20 @@ CREATE TABLE IF NOT EXISTS faculties_functionaries_heading (
 -- Faculty Functionaries List
 CREATE TABLE IF NOT EXISTS faculties_functionaries_list (
     id SERIAL PRIMARY KEY,
+    faculty_id INTEGER REFERENCES faculties_table(id) ON DELETE SET NULL,
     category_en VARCHAR(255),
     category_hn VARCHAR(255),
     category_description_en TEXT,
     category_description_hn TEXT,
+    sl_no VARCHAR(50),
     role_en VARCHAR(255),
     role_hn VARCHAR(255),
     name_en VARCHAR(255),
     name_hn VARCHAR(255),
     department_en VARCHAR(255),
     department_hn VARCHAR(255),
+    phone VARCHAR(50),
     email VARCHAR(255),
-    faculty_id VARCHAR(255),
     since_date_en VARCHAR(255),
     since_date_hn VARCHAR(255)
 );
