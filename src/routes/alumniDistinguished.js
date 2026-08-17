@@ -1,27 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-
-const uploadDir = path.join(__dirname, '../../public/uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const filename = Date.now() + '-' + file.originalname.replace(/\s+/g, '_');
-    cb(null, filename);
-  }
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 }
-});
+const { upload, deleteLocalFile } = require('../middleware/upload');
 
 // ==========================================
 // 1. Heading Endpoints
@@ -93,7 +73,7 @@ router.post('/list', upload.single('photo_file'), async (req, res) => {
 
   let photo = req.body.photo || '';
   if (req.file) {
-    photo = 'http://localhost:4000/uploads/' + req.file.filename;
+    photo = req.file.location;
   }
 
   try {
@@ -140,7 +120,7 @@ router.put('/list/:id', upload.single('photo_file'), async (req, res) => {
 
   let photo = req.body.photo;
   if (req.file) {
-    photo = 'http://localhost:4000/uploads/' + req.file.filename;
+    photo = req.file.location;
   }
 
   try {
@@ -187,6 +167,10 @@ router.put('/list/:id', upload.single('photo_file'), async (req, res) => {
         ]
       );
     }
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
     res.json(result.rows[0]);
   } catch (err) {
     console.error('PUT /api/alumni-distinguished/list/:id error:', err);
@@ -197,8 +181,15 @@ router.put('/list/:id', upload.single('photo_file'), async (req, res) => {
 router.delete('/list/:id', async (req, res) => {
   const { id } = req.params;
   try {
-    await pool.query('DELETE FROM alumni_distinguished_list WHERE id = $1', [id]);
-    res.json({ message: 'Deleted successfully' });
+    const old = await pool.query('SELECT photo FROM alumni_distinguished_list WHERE id = $1', [id]);
+    if (old.rows.length > 0 && old.rows[0].photo) {
+      await deleteLocalFile(old.rows[0].photo);
+    }
+    const result = await pool.query('DELETE FROM alumni_distinguished_list WHERE id = $1 RETURNING *', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Item not found' });
+    }
+    res.json({ success: true, message: 'Deleted successfully' });
   } catch (err) {
     console.error('DELETE /api/alumni-distinguished/list/:id error:', err);
     res.status(500).json({ error: 'Database error' });

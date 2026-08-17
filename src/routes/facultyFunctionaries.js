@@ -8,8 +8,8 @@ router.get('/', async (req, res) => {
         const result = await pool.query('SELECT * FROM faculties_functionaries_heading ORDER BY id DESC LIMIT 1');
         res.json(result.rows[0] || {});
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('GET /api/faculty-functionaries heading error:', err);
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 
@@ -32,8 +32,8 @@ router.put('/', async (req, res) => {
         }
         res.json(result.rows[0]);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('PUT /api/faculty-functionaries heading error:', err);
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 
@@ -41,15 +41,14 @@ router.put('/', async (req, res) => {
 router.get('/list', async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT f.*, ft.image_url as faculty_photo 
+            SELECT f.*
             FROM faculties_functionaries_list f
-            LEFT JOIN faculties_table ft ON f.faculty_id = ft.id
             ORDER BY f.id ASC
         `);
         res.json(result.rows);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('GET /api/faculty-functionaries/list error:', err);
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 
@@ -69,15 +68,28 @@ router.post('/list', async (req, res) => {
                 phone, email, faculty_id, since_date_en, since_date_hn
             ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING *`,
             [
-                category_en, category_hn, category_description_en, category_description_hn,
-                sl_no || '', role_en, role_hn, name_en, name_hn, department_en, department_hn,
-                phone || '', email || '', faculty_id ? parseInt(faculty_id) : null, since_date_en, since_date_hn
+                category_en || 'Dean and Associate Deans',
+                category_hn || category_en || 'डीन और एसोसिएट डीन',
+                category_description_en || '',
+                category_description_hn || '',
+                sl_no || '1',
+                role_en || '',
+                role_hn || role_en || '',
+                name_en || '',
+                name_hn || name_en || '',
+                department_en || '',
+                department_hn || department_en || '',
+                phone || '',
+                email || '',
+                faculty_id ? String(faculty_id) : '',
+                since_date_en || '',
+                since_date_hn || ''
             ]
         );
         res.json(result.rows[0]);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('POST /api/faculty-functionaries/list error:', err);
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 
@@ -98,15 +110,32 @@ router.put('/list/:id', async (req, res) => {
                  department_hn = $11, phone = $12, email = $13, faculty_id = $14, since_date_en = $15, since_date_hn = $16
              WHERE id = $17 RETURNING *`,
             [
-                category_en, category_hn, category_description_en, category_description_hn,
-                sl_no || '', role_en, role_hn, name_en, name_hn, department_en, department_hn,
-                phone || '', email || '', faculty_id ? parseInt(faculty_id) : null, since_date_en, since_date_hn, id
+                category_en || 'Dean and Associate Deans',
+                category_hn || category_en || 'डीन और एसोसिएट डीन',
+                category_description_en || '',
+                category_description_hn || '',
+                sl_no || '1',
+                role_en || '',
+                role_hn || role_en || '',
+                name_en || '',
+                name_hn || name_en || '',
+                department_en || '',
+                department_hn || department_en || '',
+                phone || '',
+                email || '',
+                faculty_id ? String(faculty_id) : '',
+                since_date_en || '',
+                since_date_hn || '',
+                id
             ]
         );
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Functionary not found' });
+        }
         res.json(result.rows[0]);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('PUT /api/faculty-functionaries/list/:id error:', err);
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 
@@ -114,11 +143,14 @@ router.put('/list/:id', async (req, res) => {
 router.delete('/list/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        await pool.query('DELETE FROM faculties_functionaries_list WHERE id = $1', [id]);
-        res.json({ message: 'Deleted successfully' });
+        const result = await pool.query('DELETE FROM faculties_functionaries_list WHERE id = $1 RETURNING *', [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Functionary not found' });
+        }
+        res.json({ success: true, message: 'Deleted successfully' });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Server error' });
+        console.error('DELETE /api/faculty-functionaries/list/:id error:', err);
+        res.status(500).json({ error: 'Server error: ' + err.message });
     }
 });
 

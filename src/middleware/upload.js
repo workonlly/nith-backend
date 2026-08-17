@@ -1,58 +1,79 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const multerS3 = require('multer-s3');
+const { S3Client, DeleteObjectCommand } = require('@aws-sdk/client-s3');
+require('dotenv').config();
 
-const uploadDir = path.join(__dirname, '../../public/uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+// Initialize S3 Client for Neon Object Storage
+const s3Client = new S3Client({
+  endpoint: process.env.AWS_ENDPOINT_URL_S3,
+  region: process.env.AWS_REGION || 'us-east-2',
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  },
+  forcePathStyle: true
+});
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const filename = Date.now() + '-' + file.originalname.replace(/\s+/g, '_');
-    cb(null, filename);
+const BUCKET_NAME = process.env.S3_BUCKET || 'nit';
+
+// S3 Storage Engine for Multer
+const s3Storage = multerS3({
+  s3: s3Client,
+  bucket: BUCKET_NAME,
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  metadata: (req, file, cb) => {
+    cb(null, { fieldName: file.fieldname });
+  },
+  key: (req, file, cb) => {
+    const cleanName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const uniqueKey = `${Date.now()}-${cleanName}`;
+    cb(null, uniqueKey);
   }
+});
+
+const upload = multer({
+  storage: s3Storage,
+  limits: { fileSize: 50 * 1024 * 1024 }
 });
 
 const uploadAuthorities = multer({
-  storage,
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype === 'application/pdf') {
-      cb(null, true);
-    } else {
-      cb(new Error('Only PDF files are allowed for document uploads.'), false);
-    }
-  },
-  limits: { fileSize: 20 * 1024 * 1024 }
+  storage: s3Storage,
+  limits: { fileSize: 50 * 1024 * 1024 }
 });
 
-const uploadMiddleware = (req, res, next) => {
-  uploadAuthorities.single('file')(req, res, (err) => {
-    if (err) return next(err);
-    if (req.file) {
-      req.file.location = 'http://localhost:4000/uploads/' + req.file.filename;
-    }
-    next();
-  });
-};
-
-const deleteLocalFile = (fileUrl) => {
+// Helper to delete a file from Neon Object Storage
+const deleteS3File = async (fileUrl) => {
   if (!fileUrl) return;
   try {
-    const urlParts = fileUrl.split('/uploads/');
-    if (urlParts.length < 2) return;
-    const filename = decodeURIComponent(urlParts[1]);
-    const filePath = path.join(uploadDir, filename);
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
+    let key = '';
+    if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
+      const urlObj = new URL(fileUrl);
+      key = decodeURIComponent(urlObj.pathname.replace(/^\//, ''));
+      if (key.startsWith(`${BUCKET_NAME}/`)) {
+        key = key.substring(BUCKET_NAME.length + 1);
+      }
+    } else {
+      key = fileUrl;
+    }
+
+    if (key) {
+      await s3Client.send(new DeleteObjectCommand({
+        Bucket: BUCKET_NAME,
+        Key: key
+      }));
     }
   } catch (err) {
-    console.error('Error deleting local file:', err);
+    console.error('Error deleting file from Neon S3 Object Storage:', err);
   }
 };
 
-module.exports = { 
-  uploadAuthorities: { single: () => uploadMiddleware }, 
-  deleteLocalFile 
+const deleteLocalFile = deleteS3File;
+
+module.exports = {
+  s3Client,
+  upload,
+  uploadAuthorities,
+  deleteS3File,
+  deleteLocalFile,
+  AUTHORITY_BUCKET: BUCKET_NAME
 };
