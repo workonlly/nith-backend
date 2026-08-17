@@ -2228,6 +2228,10 @@ CREATE TABLE IF NOT EXISTS department_research_supervision(
 -- ========================================================================
 -- academics
 -- ==========================================
+
+
+--=====================================================
+
 -- ABOUT NITH: HISTORY
 -- ==========================================
 CREATE TABLE IF NOT EXISTS aboutnith_history (
