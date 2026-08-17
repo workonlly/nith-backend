@@ -1632,6 +1632,7 @@ CREATE TABLE IF NOT EXISTS alumni_mou_heading (
 -- Alumni MoU List
 CREATE TABLE IF NOT EXISTS alumni_mou_list (
     id SERIAL PRIMARY KEY,
+    sl_no VARCHAR(50),
     title_en VARCHAR(255),
     title_hn VARCHAR(255),
     drafted_date VARCHAR(255),
@@ -1651,6 +1652,7 @@ CREATE TABLE IF NOT EXISTS alumni_functionaries_heading (
 -- Alumni Functionaries List
 CREATE TABLE IF NOT EXISTS alumni_functionaries_list (
     id SERIAL PRIMARY KEY,
+    faculty_id INTEGER REFERENCES faculties_table(id) ON DELETE CASCADE,
     section_title_en VARCHAR(255),
     section_title_hn VARCHAR(255),
     sl_no VARCHAR(50),
@@ -1693,7 +1695,7 @@ CREATE TABLE IF NOT EXISTS alumni_assist_fees (
     sl_no VARCHAR(50),
     name_en TEXT,
     name_hn TEXT,
-    fee VARCHAR(50)
+    fee TEXT
 );
 
 -- Alumni Distinguished Heading
@@ -1708,6 +1710,7 @@ CREATE TABLE IF NOT EXISTS alumni_distinguished_heading (
 -- Alumni Distinguished List
 CREATE TABLE IF NOT EXISTS alumni_distinguished_list (
     id SERIAL PRIMARY KEY,
+    sl_no VARCHAR(50),
     name_en VARCHAR(255),
     name_hn VARCHAR(255),
     batch_en VARCHAR(255),

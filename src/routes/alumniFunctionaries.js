@@ -50,11 +50,11 @@ router.get('/list', async (req, res) => {
 });
 
 router.post('/list', async (req, res) => {
-    const { section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email } = req.body;
+    const { faculty_id, section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO alumni_functionaries_list (section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-            [section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email]
+            'INSERT INTO alumni_functionaries_list (faculty_id, section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+            [faculty_id ? parseInt(faculty_id, 10) : null, section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email]
         );
         res.json(result.rows[0]);
     } catch (err) {
@@ -65,11 +65,11 @@ router.post('/list', async (req, res) => {
 
 router.put('/list/:id', async (req, res) => {
     const { id } = req.params;
-    const { section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email } = req.body;
+    const { faculty_id, section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email } = req.body;
     try {
         const result = await pool.query(
-            'UPDATE alumni_functionaries_list SET section_title_en=$1, section_title_hn=$2, sl_no=$3, name_en=$4, name_hn=$5, responsibility_en=$6, responsibility_hn=$7, phone=$8, email=$9 WHERE id=$10 RETURNING *',
-            [section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email, id]
+            'UPDATE alumni_functionaries_list SET faculty_id=$1, section_title_en=$2, section_title_hn=$3, sl_no=$4, name_en=$5, name_hn=$6, responsibility_en=$7, responsibility_hn=$8, phone=$9, email=$10 WHERE id=$11 RETURNING *',
+            [faculty_id ? parseInt(faculty_id, 10) : null, section_title_en, section_title_hn, sl_no, name_en, name_hn, responsibility_en, responsibility_hn, phone, email, id]
         );
         res.json(result.rows[0]);
     } catch (err) {
