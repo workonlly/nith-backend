@@ -8,7 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "seed": "node src/db/seed_homepage.js",
+    "seed:homepage": "node src/db/seed_homepage.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1053.0",
